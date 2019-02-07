@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:checked="true"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Home" />
+        <!--  <item
+              android:id="@+id/nav_cart"
+              android:icon="@drawable/ic_menu_history"
+              android:title="Cart" />-->
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_profile"
+            android:title="Profile" />
+
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/menu_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_order_history"
+                android:title="Order" />
+            <item
+                android:id="@+id/menu_enquery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_enquiry_history"
+                android:title="Enquiry" />
+            <item
+                android:id="@+id/menu_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_payment"
+                android:title="Payment" />
+
+            <item
+                android:id="@+id/Query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_chat"
+                android:title="Query" />
+
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share"
+                android:title="Share" />
+
+            <item
+                android:id="@+id/nav_rate_us"
+                android:icon="@drawable/ic_menu_history"
+                android:title="Rate Us" />
+
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@drawable/ic_contact_us"
+                android:title="Contact Us" />
+        </menu>
+    </item>
+
+    <item android:title="@null">
+        <item android:title="@null" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_logout"
+            android:title="Logout" />
+        <item
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:title="@string/version" />
+    </item>
+    <!--<item android:title="@null">-->
+    <!--<menu>-->
+    <!--<item-->
+    <!--android:id="@+id/nav_logout"-->
+    <!--android:icon="@drawable/ic_menu_logout"-->
+    <!--android:title="@string/logout" />-->
+    <!--</menu>-->
+    <!--</item>-->
+</menu>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "231808303569",
+    "firebase_url": "https://adventure-f7885.firebaseio.com",
+    "project_id": "adventure-f7885",
+    "storage_bucket": "adventure-f7885.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231808303569:android:c483f73bd4a50340",
+        "android_client_info": {
+          "package_name": "rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231808303569-8e3r0q10mhl0kblkn01b361fhh5hgoni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure",
+            "certificate_hash": "bfa4e0211d3aeb396994f36eec037f0531b75356"
+          }
+        },
+        {
+          "client_id": "231808303569-t9ssie41iqoknn1kc4af66q9n31kq5t7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLkmFKyJVc7KEbayyPcj0HtZP1FxiQSuE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231808303569-t9ssie41iqoknn1kc4af66q9n31kq5t7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

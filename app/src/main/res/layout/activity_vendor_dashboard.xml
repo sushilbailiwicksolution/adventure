@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/txt_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:fontFamily="@font/myfont"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="Logout"
+        android:textAllCaps="true"
+        android:textColor="@color/red"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/myfont"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text=""
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:padding="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="3dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/myfont"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Rafting"
+                android:textAllCaps="true"
+                android:textColor="@color/blue"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/img_raft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="RaftTapButton"
+                android:src="@drawable/ic_raft_inv" />
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/blue">
+
+    </View>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:padding="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/myfont"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Campaning"
+                android:textAllCaps="true"
+                android:textColor="@color/blue"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/img_camping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="CampTapButton"
+                android:src="@drawable/ic_camp_inv" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+<Button
+    android:id="@+id/btn_booking_history"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="MY Booking"
+    android:padding="3dp"
+    android:background="@drawable/ripple_button"
+    android:layout_margin="3dp"
+    android:textAllCaps="true"/>
+</LinearLayout>

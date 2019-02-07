@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Adventure Service</string>
+    <string name="facebook_app_id">322417624831812</string>
+    <string name="version">Version  V-2.8</string>
+    <string name="increment">+</string>
+    <string name="decrement">-</string>
+    <string name="display">1</string>
+
+
+    <!--Pay u Money Detail-->
+    <string name="PAYU_Merchant_ID">513338</string>
+    <string name="PAYU_Merchant_key">Agh7Qj</string>
+    <string name="PAYU_Merchant_salt">wY9k3Ruz</string>
+
+    <!--Prince Dialog-->
+
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="LOADING">Loading...</string>
+
+    <string name="rock"><b>Rock Climbing</b></string>
+    <string name="rafting"><b>Rafting</b></string>
+    <string name="camping"><b>camping</b></string>
+
+
+    <string name="login_tab"><b>Login</b></string>
+    <string name="signup_tab"><b>Create Account</b></string>
+    <string name="quote">Life was meant for good friends and great adventures</string>
+    <string name="servcies_tab"><b>Services</b></string>
+    <string name="destination_tab"><b>Destination</b></string>
+
+    <string name="agree_terms">By Registering you are agreeing to our <b>terms and conditions</b>.</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="product_description">A buyer persona is an imaginary customer. It is the person for whom you’ve developed your product and to whom you’d love to sell it (of course!). He or she represents your target audience, but is much more real than a vague description of some demographics.
+       You need to know your buyer persona so well that you know exactly what makes her laugh, what makes her shake her head in disbelief, what makes her click buy, and what makes her hesitate to order.
+        To describe your buyer persona, think about what she’s reading and which websites she visits, because that will help you understand the right tone of voice that will engage her. Consider what keeps her awake at night, what she dreams of achieving, and how she makes decisions, because that will enable you to create copy that speaks to her and taps into her feelings.</string>
+
+    <string name="pacakage_description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?</string>
+    <string name="mail_website"><![CDATA[Mail & Website]]></string>
+    <string name="contact">Contact</string>
+    <string name="address">Address</string>
+
+</resources>

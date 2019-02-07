@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources  xmlns:android="http://schemas.android.com/apk/res/android">
+    <color name="colorPrimary">#1DA1F2</color>
+    <color name="colorPrimaryDark">#1DA1F2</color>
+    <color name="colorAccent">#5C6BC0</color>
+    <color name="colorLightGray">#D8D8D8</color>
+
+    <color name="black">#000000</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="dark_gray">#A9A9A9</color>
+    <color name="light_gray">#E3E8EA</color>
+
+    <color name="white">#FDFEFE</color>
+    <color name="red">#D50000</color>
+    <color name="lighter_blue">#D9F9FC</color>
+    <color name="light_green">#57D8A4</color>
+    <color name="orange">#FFA500</color>
+    <color name="darkOrange">#FF8C00</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="lightOrange">#FFC04C</color>
+    <color name="blue">#1DA1F2</color>
+    <color name="dark_blue">#fc3a5ba3</color>
+    <color name="recycler_grey">#707B7C</color>
+    <color name="dark_grey">#D5D8DC</color>
+    <color name="app_red">#AF0001</color>
+
+
+    <color name="light_white">#fcfcfc</color>
+    <color name="colorGrayTransparent">#7f3b413e</color>
+    <color name="fuchsia">#FF00FF</color>
+    <color name="pink_mat">#eb93b9</color>
+    <color name="pink_mat_dark">#d72d74</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="gray">#808080</color>
+    <color name="lightgray">#D6DBDF</color>
+    <color name="olive">#808000</color>
+    <color name="purple">#800080</color>
+    <color name="box_purple">#8d48b3</color>
+    <color name="maroon">#800000</color>
+    <color name="aqua">#00FFFF</color>
+    <color name="lime">#00FF00</color>
+    <color name="teal">#008080</color>
+    <color name="green">#008000</color>
+    <color name="box_green">#70c246</color>
+    <color name="box_blue">#4396c2</color>
+    <color name="navy">#000080</color>
+    <color name="black_alpha_50">#80000000</color>
+    <color name="box_orange">#d96720</color>
+    <color name="album_title">#4c4c4c</color>
+    <color name="color_number">#3f4344</color>
+    <color name="blackTranparent">#DB000000</color>
+
+    <color name="box_blue_inventory">#5bc0de</color>
+    <color name="box_blue_border">#4cb5d4</color>
+
+    <color name="box_yellow_inventory">#fec107</color>
+    <color name="box_yellow_border">#efb608</color>
+
+    <color name="box_green_inventory">#029b17</color>
+    <color name="box_green_border">#028213</color>
+
+    <color name="float_transparent">#00000000</color>
+    <color name="sweet_dialog_bg_color">#FFFFFF</color>
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="blue_btn_bg_color">#AEDEF4</color>
+    <color name="blue_btn_bg_pressed_color">#96BFD2</color>
+    <color name="red_btn_bg_color">#DD6B55</color>
+    <color name="red_btn_bg_pressed_color">#CD5B55</color>
+    <color name="error_stroke_color">#F27474</color>
+    <color name="success_stroke_color">#A5DC86</color>
+    <color name="trans_success_stroke_color">#33A5DC86</color>
+    <color name="warning_stroke_color">#F8BB86</color>
+    <color name="text_color">#575757</color>
+    <color name="material_blue_grey_80">#ff37474f</color>
+    <color name="material_blue_grey_90">#ff263238</color>
+    <color name="material_blue_grey_95">#ff21272b</color>
+    <color name="material_deep_teal_20">#ff80cbc4</color>
+    <color name="material_deep_teal_50">#ff009688</color>
+</resources>

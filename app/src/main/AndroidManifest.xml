@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".App.AppController1"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activties.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Camp.CampMasterActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".loginRegister.LoginRegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activties.HomePage"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Product.ProductViewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged" />
+        <activity
+            android:name=".Activties.ProductCatagory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activties.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Rafting.RaftingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Camp.Camp_viewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activties.CartList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity
+            android:name=".ActivityVendor.Activity_VendorDashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityVendor.ActivityCampInventory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityVendor.Activity_camp_Room_control"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityVendor.ActivityRAftingInventory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityVendor.Activity_Raft_Seat_Control"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityVendor.ActivityVendor_History"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activties.OTPscreenActivity"
+            android:screenOrientation="portrait" />
+
+
+
+        <!--
+              <activity
+              android:name=".EnquiryForms.EnquiryForm1"
+              android:screenOrientation="portrait"></activity>
+        -->
+        <!-- facebook -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!-- facebook -->
+        <!-- Notification Services -->
+
+        <service android:name=".Firebase.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".Firebase.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".Firebase.FirebaseDataReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!-- End zNotification Services -->
+        <!-- Pay U Money -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="fabaabc4273e4e67d52a5410e9b2fa7a59088976" />
+
+        <!-- Pay u money end -->
+
+        <activity android:name=".Activties.ContactUsActivity"></activity>
+    </application>
+
+</manifest>

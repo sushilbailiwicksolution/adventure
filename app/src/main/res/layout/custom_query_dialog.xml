@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_tab_pressed"
+    android:padding="@dimen/dimen_8dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_2dp"
+        android:layout_marginEnd="@dimen/dimen_8dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:layout_marginTop="@dimen/dimen_4dp"
+        android:background="@drawable/border_blue"
+        android:hint="Name"
+        android:inputType="text"
+        android:padding="@dimen/dimen_8dp"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_2dp"
+        android:layout_marginEnd="@dimen/dimen_8dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:layout_marginTop="@dimen/dimen_2dp"
+        android:background="@drawable/border_blue"
+        android:hint="Mobile No."
+        android:inputType="number"
+        android:maxLength="10"
+        android:padding="@dimen/dimen_8dp"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_2dp"
+        android:layout_marginEnd="@dimen/dimen_8dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:layout_marginTop="@dimen/dimen_2dp"
+        android:background="@drawable/border_blue"
+        android:hint="Title"
+        android:inputType="text"
+        android:padding="@dimen/dimen_8dp"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etQuery"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="@dimen/dimen_2dp"
+        android:layout_marginEnd="@dimen/dimen_8dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:layout_marginTop="@dimen/dimen_2dp"
+        android:background="@drawable/border_blue"
+        android:gravity="top"
+        android:hint="Type your query here"
+        android:inputType="text"
+        android:padding="@dimen/dimen_8dp"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnSendQuery"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dimen_2dp"
+        android:layout_marginTop="@dimen/dimen_2dp"
+        android:background="@color/red_btn_bg_color"
+        android:text="SEND"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>
