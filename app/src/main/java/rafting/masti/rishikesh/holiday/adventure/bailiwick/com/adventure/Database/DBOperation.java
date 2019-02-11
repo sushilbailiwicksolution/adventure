@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.CartListModel;
 
 public class DBOperation {
-    final static String PREFS_NAME = "MyPrefsFile";
 
+    private final static String PREFS_NAME = "MyPrefsFile";
 
     // Insert Booth in table
     public static boolean insertBooth(Context c, String bid, String booth_name, String consistency_name) {
@@ -21,13 +21,11 @@ public class DBOperation {
         DatabaseHelper dbhelperShopCart = new DatabaseHelper(c);
 
         Cursor cur = null;
-
         try {
             dbhelperShopCart.createDataBase();
             SQLiteDatabase database = DatabaseHelper.openDataBase();
 
             cur = database.rawQuery("select * from " + Database_Utils.Booth_table, null);
-
 
             int len = cur.getCount();
             System.out.println("lenght " + len);
@@ -46,13 +44,16 @@ public class DBOperation {
             database.insert(Database_Utils.Booth_table, null, newValues);
             ///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
 
-
             //	database.execSQL(sql);
             database.close();
             DatabaseHelper.closedatabase();
             return true;
         } catch (Exception e) {
             return false;
+        }finally {
+            if (cur!=null){
+                cur.close();
+            }
         }
 
 
@@ -62,11 +63,10 @@ public class DBOperation {
     ///////////////////// /*helping APi*/////////////////////
     ///////////////////// /*helping APi*/////////////////////
 
-
     ////////////////// Prince test///////////////////
     public static int getRaftCount(Context c, String Cart_id) {
         DatabaseHelper dbhelperShopCart = new DatabaseHelper(c);
-        Cursor cur = null;
+        Cursor cur;
         try {
             dbhelperShopCart.createDataBase();
             SQLiteDatabase database = DatabaseHelper.openDataBase();
@@ -77,13 +77,13 @@ public class DBOperation {
                         + Cart_id + "'", null);
 
             }
-            int len=0;
-             len = cur.getCount();
+            int len;
+            len = cur.getCount();
             System.out.println("lenght " + len);
             if (len > 0) {
                 SharedPreferences pageNumPref = c.getSharedPreferences(
                         PREFS_NAME, 0);
-                pageNumPref.edit().putInt("dbsize", len).commit();
+                pageNumPref.edit().putInt("dbsize", len).apply();
 
             } else {
                 cur.close();
@@ -116,7 +116,6 @@ public class DBOperation {
 
             cur = database.rawQuery("select * from " + Database_Utils.Cart_table, null);
 
-
             int len = cur.getCount();
             System.out.println("lenght " + len);
 
@@ -126,7 +125,6 @@ public class DBOperation {
             Log.e("price", price);
             Log.e("amount", total);
             Log.e("amount", total);
-
 
             newValues.put(Database_Utils.cart_id, id);
             newValues.put(Database_Utils.cart_tittle, tittle);
@@ -153,13 +151,16 @@ public class DBOperation {
             database.insert(Database_Utils.Cart_table, null, newValues);
             ///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
 
-
             //	database.execSQL(sql);
             database.close();
             DatabaseHelper.closedatabase();
             return true;
         } catch (Exception e) {
             return false;
+        }finally {
+            if (cur != null) {
+                cur.close();
+            }
         }
 
 
@@ -229,6 +230,10 @@ public class DBOperation {
             return true;
         } catch (Exception e) {
             return false;
+        }finally {
+            if (cur != null) {
+                cur.close();
+            }
         }
 
 
@@ -254,7 +259,7 @@ public class DBOperation {
             if (len > 0) {
                 SharedPreferences pageNumPref = c.getSharedPreferences(
                         PREFS_NAME, 0);
-                pageNumPref.edit().putInt("dbsize", len).commit();
+                pageNumPref.edit().putInt("dbsize", len).apply();
             } else {
                 cur.close();
                 DatabaseHelper.closedatabase();
@@ -296,6 +301,10 @@ public class DBOperation {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }finally {
+            if (cur != null) {
+                cur.close();
+            }
         }
     }
 
@@ -342,7 +351,7 @@ public class DBOperation {
     // mine
     public static String[] getAlluserquote(Context c) {
         DatabaseHelper dbhelperShopCart = new DatabaseHelper(c);
-        Cursor cur = null;
+        Cursor cur;
         String data[];// = new String[3];
         try {
             dbhelperShopCart.createDataBase();
@@ -355,7 +364,7 @@ public class DBOperation {
             if (len > 0) {
                 SharedPreferences pageNumPref = c.getSharedPreferences(
                         PREFS_NAME, 0);
-                pageNumPref.edit().putInt("dbsize", len).commit();
+                pageNumPref.edit().putInt("dbsize", len).apply();
             } else {
                 cur.close();
                 DatabaseHelper.closedatabase();
@@ -380,7 +389,7 @@ public class DBOperation {
 
     public static String[] getAllUserQuote(Context c) {
         DatabaseHelper dbhelperShopCart = new DatabaseHelper(c);
-        Cursor cur = null;
+        Cursor cur;
         String data[];// = new String[3];
         try {
             dbhelperShopCart.createDataBase();
@@ -394,7 +403,7 @@ public class DBOperation {
             if (len > 0) {
                 SharedPreferences pageNumPref = c.getSharedPreferences(
                         PREFS_NAME, 0);
-                pageNumPref.edit().putInt("dbsize", len).commit();
+                pageNumPref.edit().putInt("dbsize", len).apply();
             } else {
                 cur.close();
                 DatabaseHelper.closedatabase();
@@ -416,8 +425,8 @@ public class DBOperation {
 
     public static ArrayList<String[]> getAllQuotes(Context c) {
         DatabaseHelper dbhelperShopCart = new DatabaseHelper(c);
-        Cursor cur = null;
-        ArrayList<String[]> arList = new ArrayList<String[]>();
+        Cursor cur;
+        ArrayList<String[]> arList = new ArrayList<>();
         try {
             dbhelperShopCart.createDataBase();
             SQLiteDatabase database = DatabaseHelper.openDataBase();
@@ -429,7 +438,7 @@ public class DBOperation {
             if (len > 0) {
                 SharedPreferences pageNumPref = c.getSharedPreferences(
                         PREFS_NAME, 0);
-                pageNumPref.edit().putInt("dbsize", len).commit();
+                pageNumPref.edit().putInt("dbsize", len).apply();
             } else {
                 cur.close();
                 DatabaseHelper.closedatabase();
@@ -456,7 +465,7 @@ public class DBOperation {
     public static String[] getQuotes(Context c, String id) {
         String data[] = new String[3];
         DatabaseHelper dbhelperShopCart = new DatabaseHelper(c);
-        Cursor cur = null;
+        Cursor cur;
         try {
             dbhelperShopCart.createDataBase();
             SQLiteDatabase database = DatabaseHelper.openDataBase();
@@ -494,7 +503,7 @@ public class DBOperation {
     public static String getQuote(Context c, String id) {
         String data = "";
         DatabaseHelper dbhelperShopCart = new DatabaseHelper(c);
-        Cursor cur = null;
+        Cursor cur;
         try {
             dbhelperShopCart.createDataBase();
             SQLiteDatabase database = DatabaseHelper.openDataBase();
@@ -529,8 +538,8 @@ public class DBOperation {
 
     public static ArrayList<String[]> getAllFavQuotes(Context c) {
         DatabaseHelper dbhelperShopCart = new DatabaseHelper(c);
-        Cursor cur = null;
-        ArrayList<String[]> arList = new ArrayList<String[]>();
+        Cursor cur;
+        ArrayList<String[]> arList = new ArrayList<>();
         try {
             dbhelperShopCart.createDataBase();
             SQLiteDatabase database = DatabaseHelper.openDataBase();
@@ -618,6 +627,10 @@ public class DBOperation {
             return true;
         } catch (Exception e) {
             return false;
+        }finally {
+            if (cur != null){
+                cur.close();
+            }
         }
 
 

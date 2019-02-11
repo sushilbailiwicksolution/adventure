@@ -67,7 +67,7 @@
                     android:layout_marginTop="30dp"
                     android:background="@color/white"
                     android:fontFamily="@font/myfont"
-                    android:hint=" Last Name"
+                    android:hint="Last Name"
                     android:inputType="textPersonName"
                     android:textSize="15sp" />
                 <View
@@ -216,6 +216,7 @@
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/myfont"
                 android:background="@color/blue"
                 android:text="Create Account"
                 android:textColor="@color/white"

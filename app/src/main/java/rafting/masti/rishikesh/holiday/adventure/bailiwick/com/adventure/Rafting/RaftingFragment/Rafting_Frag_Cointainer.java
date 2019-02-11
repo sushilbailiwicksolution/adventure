@@ -374,7 +374,6 @@ public class Rafting_Frag_Cointainer extends Fragment {
 
     }
 
-
     private void setDataTiming() {
         try {
             if (TEMPJSON != null) {
@@ -427,7 +426,7 @@ public class Rafting_Frag_Cointainer extends Fragment {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((RaftingActivity) getActivity()).mViewPager.setCurrentItem(0);
+              /*  ((RaftingActivity) getActivity()).mViewPager.setCurrentItem(0);*/
 
             }
         });

@@ -17,7 +17,7 @@
     <string name="dialog_default_title">Here\'s a message!</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancel</string>
-    <string name="LOADING">Loading...</string>
+    <string name="LOADING">Loading…</string>
 
     <string name="rock"><b>Rock Climbing</b></string>
     <string name="rafting"><b>Rafting</b></string>
@@ -33,13 +33,33 @@
     <string name="agree_terms">By Registering you are agreeing to our <b>terms and conditions</b>.</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
-    <string name="product_description">A buyer persona is an imaginary customer. It is the person for whom you’ve developed your product and to whom you’d love to sell it (of course!). He or she represents your target audience, but is much more real than a vague description of some demographics.
-       You need to know your buyer persona so well that you know exactly what makes her laugh, what makes her shake her head in disbelief, what makes her click buy, and what makes her hesitate to order.
-        To describe your buyer persona, think about what she’s reading and which websites she visits, because that will help you understand the right tone of voice that will engage her. Consider what keeps her awake at night, what she dreams of achieving, and how she makes decisions, because that will enable you to create copy that speaks to her and taps into her feelings.</string>
+    <string name="product_description">A buyer persona is an imaginary customer. It is the person for
+        whom you’ve developed your product and to whom you’d love to sell it (of course!). He or she
+        represents your target audience, but is much more real than a vague description of some demographics.
+        You need to know your buyer persona so well that you know exactly what makes her laugh, what
+        makes her shake her head in disbelief, what makes her click buy, and what makes her hesitate to order.
+        To describe your buyer persona, think about what she’s reading and which websites she visits,
+        because that will help you understand the right tone of voice that will engage her. Consider
+        what keeps her awake at night, what she dreams of achieving, and how she makes decisions,
+        because that will enable you to create copy that speaks to her and taps into her feelings.</string>
 
-    <string name="pacakage_description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?</string>
+    <string name="pacakage_description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit
+        omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?Lorem ipsum dolor
+        sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio,
+        sapiente distinctio illo?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi
+        et iure laudantium vitae, praesentium optio, sapiente distinctio illo?Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?</string>
+
     <string name="mail_website"><![CDATA[Mail & Website]]></string>
     <string name="contact">Contact</string>
     <string name="address">Address</string>
+    <string name="rafting_details">Rafting Image</string>
+    <string name="information_collect">We collect information from you when you register on our site
+        or place an order. When ordering or registering on our site, as appropriate, you may be asked
+        to enter the following : "\n" "\t" \u2022 To personalise your experience, your information helps to better
+        respond to individual needs.  "\n" "\t" \u2022 To personalise your experience, your information helps to better
+        respond to individual needs.  "\n" "\t" \u2022 To personalise your experience, your information helps to better
+        respond to individual needs.  "\n" "\t" \u2022 To personalise your experience, your information helps to better
+        respond to individual needs. </string>
 
 </resources>

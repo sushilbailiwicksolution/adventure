@@ -24,6 +24,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -79,6 +81,9 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
     EditText etName, etTitle, etMobile, etQuery;
     Button mSendQuery;
 
+    TextView textViewCount;
+    int count;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +97,7 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
         setCollapseToolabr();
         setTabview();
         Toast.makeText(getApplicationContext(), SharedPref.getFirstName(), Toast.LENGTH_LONG).show();
+
     }
 
 
@@ -147,6 +153,60 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.home_menu, menu);
+
+        final View badge = menu.findItem(R.id.cart_item).getActionView();
+        textViewCount = badge.findViewById(R.id.txtCount);
+        count = Integer.parseInt(textViewCount.getText().toString());
+        updateCountBadge(count++);
+        textViewCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateCountBadge(count++);
+            }
+        });
+
+        badge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("Some Action","Here Clicked");
+            }
+        });
+
+        return true;
+    }
+
+    private void updateCountBadge(int new_count){
+        count = new_count;
+        if(count < 0) return;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (count == 0){
+                    textViewCount.setVisibility(View.GONE);
+                }else {
+                    textViewCount.setVisibility(View.VISIBLE);
+                    textViewCount.setText(Integer.toString(count));
+                }
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.cart_item:
+                Intent intent = new Intent(this,CartList.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void createIDs() {
@@ -210,9 +270,7 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
             case R.id.Query:
                 drawer.closeDrawers();
                 sendQueryDialog();
-
                 return true;
-
 
             case R.id.nav_contact_us:
                 drawer.closeDrawers();
@@ -221,7 +279,6 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
                 return true;
 
             case R.id.nav_share:
-
                 drawer.closeDrawers();
                 shareApp();
                 return true;
@@ -230,7 +287,6 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
                 drawer.closeDrawers();
                 rateUs();
                 return true;
-
 
             case R.id.menu_order:
                 drawer.closeDrawers();
@@ -255,7 +311,6 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
                 return super.onOptionsItemSelected(item);
 
         }
-
         /*else  if(id==R.id.nav_cart){
             Intent i = new Intent(HomePage.this, CartList.class);
             startActivity(i);
@@ -346,7 +401,6 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
 
     private void GetUserDetail(final String deviceid, final String fcm) {
 
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -391,8 +445,6 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
                 Map<String, String> header = new HashMap<String, String>();
                 header.put(Itags.Header, "ABC98XYZ53IJ61L");
                 // params.put("Accept-Language", "fr");
-
-
                 return header;
             }
 

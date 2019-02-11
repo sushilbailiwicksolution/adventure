@@ -87,9 +87,9 @@ public class NumberPicker extends LinearLayout {
         LayoutInflater.from(this.mContext).inflate(layout, this, true);
 
         // init ui components
-        this.decrementButton = (Button) findViewById(R.id.decrement);
-        this.incrementButton = (Button) findViewById(R.id.increment);
-        this.displayEditText = (EditText) findViewById(R.id.display);
+        this.decrementButton = findViewById(R.id.decrement);
+        this.incrementButton = findViewById(R.id.increment);
+        this.displayEditText = findViewById(R.id.display);
 
         // register button click and action listeners
         this.incrementButton.setOnClickListener(new ActionListener(this, this.displayEditText, ActionEnum.INCREMENT));

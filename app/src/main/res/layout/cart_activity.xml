@@ -18,10 +18,9 @@
             android:paddingBottom="5dp"
             android:paddingTop="5dp">
 
-           <include layout="@layout/header"></include>
+           <include layout="@layout/header"/>
 
         </RelativeLayout>
-
 
     </LinearLayout>
 
@@ -213,9 +212,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/myfont"
                 android:gravity="center"
-
                 android:padding="5dp"
-                android:text=" Paid Amount"
+                android:text=" Amount to Pay"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -227,7 +225,6 @@
                 android:fontFamily="@font/myfont"
                 android:gravity="center"
                 android:padding="5dp"
-
                 android:text=" 500"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -237,7 +234,6 @@
             android:id="@+id/btn_book_services"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:background="@drawable/ripple_button"
             android:text="Book Service" />
 

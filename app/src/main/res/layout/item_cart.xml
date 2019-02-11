@@ -29,7 +29,7 @@
                 android:fontFamily="@font/myfont"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="Tittle"
+                android:text="Title"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
 
@@ -126,7 +126,7 @@
                         android:layout_gravity="start|center"
                         android:drawableRight="@android:drawable/ic_menu_edit"
                         android:fontFamily="@font/myfont"
-                        android:gravity="start|center"
+                        android:gravity="center"
                         android:padding="4dp"
                         android:text="No of Night 5"
                         android:textColor="@color/black" />
@@ -189,7 +189,7 @@
                                 android:fontFamily="@font/myfont"
                                 android:gravity="center"
                                 android:padding="3dp"
-                                android:text="price"
+                                android:text="Price"
                                 android:textColor="@color/blue" />
 
                             <TextView

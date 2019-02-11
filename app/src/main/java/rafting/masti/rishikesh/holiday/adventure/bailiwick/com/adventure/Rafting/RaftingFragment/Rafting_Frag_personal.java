@@ -62,7 +62,7 @@ public class Rafting_Frag_personal extends Fragment {
         editTextChangeListenr();
         getRaftingDetail();
         return rootView;
-    }
+}
 
     private void getRaftingDetail() {
         prog.setTitle("Please wait.");
@@ -211,11 +211,11 @@ public class Rafting_Frag_personal extends Fragment {
 
     }
 
-    private void setSwipeisEnable(boolean isEnable) {
+   /* private void setSwipeisEnable(boolean isEnable) {
         ((RaftingActivity) getActivity()).mViewPager.setSwipeable(isEnable);
 
     }
-
+*/
     private void setDetails() {
         edt_name.setText(SharedPref.getFirstName() + " " + SharedPref.getLastName());
         edt_mobile.setText(SharedPref.getMobile1());
@@ -250,7 +250,7 @@ public class Rafting_Frag_personal extends Fragment {
                     return;
                 }
 
-                ((RaftingActivity) getActivity()).mViewPager.setCurrentItem(1);
+               /* ((RaftingActivity) getActivity()).mViewPager.setCurrentItem(1);*/
 
                 //            ((RaftingActivity) getActivity()).mViewPager.setSwipeable(true);
             }

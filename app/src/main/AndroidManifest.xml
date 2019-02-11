@@ -32,7 +32,7 @@
         </activity>
         <activity
             android:name=".Camp.CampMasterActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".loginRegister.LoginRegisterActivity"
             android:screenOrientation="portrait" />
@@ -84,8 +84,6 @@
             android:name=".Activties.OTPscreenActivity"
             android:screenOrientation="portrait" />
 
-
-
         <!--
               <activity
               android:name=".EnquiryForms.EnquiryForm1"
@@ -135,7 +133,8 @@
 
         <!-- Pay u money end -->
 
-        <activity android:name=".Activties.ContactUsActivity"></activity>
+        <activity android:name=".Activties.ContactUsActivity" />
+        <activity android:name=".Activties.AboutRafting"></activity>
     </application>
 
 </manifest>
