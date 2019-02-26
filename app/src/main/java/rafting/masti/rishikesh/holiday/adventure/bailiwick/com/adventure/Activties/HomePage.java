@@ -31,6 +31,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.rom4ek.arcnavigationview.ArcNavigationView;
 
 import org.json.JSONObject;
@@ -48,13 +50,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Firebase.MyFirebaseInstanceIDService;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.RootActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.loginRegister.LoginRegisterActivity;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.loginRegister.ServiceTabNew;
 
@@ -64,6 +66,7 @@ import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.loginRe
  */
 
 public class HomePage extends RootActivity implements ArcNavigationView.OnNavigationItemSelectedListener {
+
     private Context context;
     ProgressDialog prg;
     String TAG;
@@ -73,16 +76,18 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
     CoordinatorLayout cordinate_layout;
     //
 // Navigation item
-    TextView tvUserName;
+    TextView tvUserName, tvVersionName;
     ImageView ivProfile;
     TextView txt_username;
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
     EditText etName, etTitle, etMobile, etQuery;
     Button mSendQuery;
+    LinearLayout llProfile;
 
     TextView textViewCount;
     int count;
+    View badge;
 
 
     @Override
@@ -113,13 +118,11 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-
     }
 
     private void setCollapseToolabr() {
         final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         txt_username.setText(SharedPref.getFirstName() + " " + SharedPref.getLastName());
-
 
         collapsingToolbarLayout.setTitle(" ");
         AppBarLayout appBarLayout = findViewById(R.id.appbar);
@@ -155,41 +158,55 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
         toggle.syncState();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.home_menu, menu);
 
-        final View badge = menu.findItem(R.id.cart_item).getActionView();
+        badge = menu.findItem(R.id.cart_item).getActionView();
         textViewCount = badge.findViewById(R.id.txtCount);
-        count = Integer.parseInt(textViewCount.getText().toString());
-        updateCountBadge(count++);
-        textViewCount.setOnClickListener(new View.OnClickListener() {
+        //count = Integer.parseInt(textViewCount.getText().toString());
+        Log.e("Cart count", "" + SharedPref.getCartCount());
+
+        if (!SharedPref.getCartCount().isEmpty() && !SharedPref.getCartCount().equals("0")) {
+            Log.e("Cart count", "" + SharedPref.getCartCount());
+            count = Integer.parseInt(SharedPref.getCartCount());
+            updateCountBadge(count);
+        } else {
+            Log.e("Cart count", "" + SharedPref.getCartCount());
+            updateCountBadge(count);
+        }
+
+       /* textViewCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("Badge Count=> ",""+count);
                 updateCountBadge(count++);
             }
-        });
+        });*/
 
         badge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("Some Action","Here Clicked");
+                Log.e("Some Action", "Here Clicked");
+                Intent intent = new Intent(HomePage.this, CartList.class);
+                startActivity(intent);
             }
         });
 
         return true;
     }
 
-    private void updateCountBadge(int new_count){
+    private void updateCountBadge(int new_count) {
         count = new_count;
-        if(count < 0) return;
+        if (count < 0) return;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (count == 0){
+                if (count == 0) {
                     textViewCount.setVisibility(View.GONE);
-                }else {
+                } else {
                     textViewCount.setVisibility(View.VISIBLE);
                     textViewCount.setText(Integer.toString(count));
                 }
@@ -197,7 +214,7 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
         });
     }
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.cart_item:
@@ -207,7 +224,7 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     private void createIDs() {
         prg = new ProgressDialog(context);
@@ -221,12 +238,21 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
 
         View headerLayout = navigationView.getHeaderView(0);
         tvUserName = headerLayout.findViewById(R.id.tvUserName);
+        tvVersionName = headerLayout.findViewById(R.id.tvVersionName);
         ivProfile = headerLayout.findViewById(R.id.ivProfile);
         tvUserName.setText(SharedPref.getFirstName());
         txt_username = findViewById(R.id.txt_username);
         txt_username.setText(SharedPref.getFirstName() + " " + SharedPref.getLastName());
-
-        //Picasso.with(context).load(SharedPref.getProfile_url()).into(ivProfile);
+        tvVersionName.setText(SharedPref.getEmail());
+        llProfile = headerLayout.findViewById(R.id.llProfile);
+        llProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profileIntent = new Intent(HomePage.this,ProfileActivity.class);
+                startActivity(profileIntent);
+            }
+        });
+        //Glide.with(context).load(SharedPref.getprofileURL()).into(ivProfile);
 
     }
 
@@ -300,11 +326,11 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
                 startActivity(inEnqry);
                 return true;
 
-            case R.id.menu_payment:
+          /*   case R.id.menu_payment:
                 drawer.closeDrawers();
                 Intent inPAy = new Intent(context, PaymentQueryActivity.class);
                 startActivity(inPAy);
-                return true;
+                return true;*/
 
             default:
                 drawer.closeDrawers();
@@ -372,13 +398,21 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
             return 1;
         }
 
-
     }
 
     @Override
     protected void onResume() {
-        GetUserDetail(getDeviceDetail(), getFcmkey());
+        getUserDetail(getDeviceDetail(), getFcmkey());
+       /* if (!SharedPref.getCartCount().isEmpty() && !SharedPref.getCartCount().equals("0")){
+            Log.e("Cart count",""+SharedPref.getCartCount());
+            count = Integer.parseInt(SharedPref.getCartCount());
+            updateCountBadge(count);
+        }else{
+            Log.e("Cart count",""+SharedPref.getCartCount());
+            updateCountBadge(count);
+        }*/
         super.onResume();
+//        invalidateOptionsMenu();
     }
 
     private String getFcmkey() {
@@ -399,72 +433,69 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
         return deviceID;
     }
 
-    private void GetUserDetail(final String deviceid, final String fcm) {
+    private void getUserDetail(final String deviceid, final String fcm) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        if (new CheckConnectivity().isConnected(context)) {
+        if (new CheckConnectivity().isConnected(context)) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
                             try {
                                 Log.e("Response : prince ", response);
                                 if (response != null) {
                                     JSONObject jsData = new JSONObject(response);
                                     String status = jsData.getString("status");
                                     if (status.equalsIgnoreCase("1")) {
-                                        SaveDetal(jsData);
-
+                                        saveDetail(jsData);
                                     } else {
                                         String msg = jsData.getString("msg");
-
                                     }
                                 } else {
                                     Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
-
                                 }
                             } catch (Exception ex) {
                                 ex.printStackTrace();
-
                             }
-                        } else {
-                            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                    Log.e("Error :", error.toString());
+                }
+            }) {
 
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                return header;
-            }
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header, "ABC98XYZ53IJ61L");
+                    // params.put("Accept-Language", "fr");
+                    return header;
+                }
 
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
 
-                params.put("action", UtilsUrl.Action_userDetail);
-                params.put("user_id", SharedPref.getUserID());
-                params.put("fcm", fcm);
-                params.put("device_id", deviceid);
-                Log.e("Param Response ", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+                    params.put("action", UtilsUrl.Action_userDetail);
+                    params.put("user_id", SharedPref.getUserID());
+                    params.put("fcm", fcm);
+                    params.put("device_id", deviceid);
+                    Log.e("Param Response ", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
+
+        } else {
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
 
     }
 
-    private void SaveDetal(JSONObject jsData) {
+    private void saveDetail(JSONObject jsData) {
         try {
             JSONObject data = jsData.getJSONObject("data");
 
@@ -475,7 +506,6 @@ public class HomePage extends RootActivity implements ArcNavigationView.OnNaviga
             SharedPref.saveEmail(data.getString("email"));
             if (!data.getString("profile_pic").equalsIgnoreCase("")) {
                 SharedPref.saveprofileURL(data.getString("profile_pic"));
-
             }
             SharedPref.savegender(data.getString("gender"));
             SharedPref.saveAddress(data.getString("address"));

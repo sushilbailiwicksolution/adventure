@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,12 +21,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.CustomDialog.SweetAlertDialog;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.custom_dialog.SweetAlertDialog;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.RootActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Const;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 
 /**
  * Created by Prince on 12-09-2018.
@@ -73,28 +73,23 @@ public class OTPscreenActivity extends RootActivity {
         btn_Apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (isPassword) {
                     String password = edt_password.getText().toString();
                     String confirm = edt_confirm.getText().toString();
 
                     if (password.equalsIgnoreCase("")) {
                         edt_password.setError("Mandatory");
-                        return;
                     } else if (password.length() < 6) {
-                        edt_password.setError("Password shoud be at least 6 character");
-                        return;
+                        edt_password.setError("Password should be at least 6 character");
                     } else if (!password.equalsIgnoreCase(confirm)) {
                         edt_confirm.setError("Confirm password not match ");
-                        return;
                     } else {
                         changePassword(password, email);
                     }
                 } else {
                     String otp_value = edt_otp.getText().toString().trim();
                     if (otp_value.equalsIgnoreCase("")) {
-                        edt_otp.setError("Please enter Valid Otp");
-                        return;
+                        edt_otp.setError("Please enter Otp");
                     } else {
                         checkOTP(otp_value);
                     }
@@ -105,14 +100,14 @@ public class OTPscreenActivity extends RootActivity {
     }
 
     private void changePassword(final String password, final String email) {
-        prg.setMessage("Please Wait....");
-        prg.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Display the first 500 characters of the response string.
-                if (new CheckConnectivity().isConnected(context)) {
+        if (new CheckConnectivity().isConnected(context)) {
+            prg.setMessage("Please Wait....");
+            prg.show();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
                     try {
                         prg.dismiss();
                         Log.e("Response : prince ", response);
@@ -122,59 +117,56 @@ public class OTPscreenActivity extends RootActivity {
                             if (status.equalsIgnoreCase("1")) {
 
                                 String msg = jsData.getString("msg");
-                                Log.e("message have to show dialog sweet here : ", msg);
+                                Log.e("Message => ", msg);
                                 showSweetDialog();
 
                             } else {
                                 String msg = jsData.getString("msg");
                                 Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-
                             }
                         } else {
                             Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
-
                         }
                     } catch (Exception ex) {
-
                         ex.printStackTrace();
-
                     }
-                } else {
-                    Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                prg.dismiss();
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prg.dismiss();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                    Log.e("Error :", error.toString());
+                }
+            }) {
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                Log.e("Param header ", "" + header);
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header, Const.APP_TOKEN);
+                    // params.put("Accept-Language", "fr");
+                    Log.e("Param header ", "" + header);
 
-                return header;
-            }
+                    return header;
+                }
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("action", UtilsUrl.Action_updatePassword);
-                params.put("email", email);
-                params.put("password", password);
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put(Const.KEY_ACTION, UtilsUrl.Action_updatePassword);
+                    params.put(Const.KEY_EMAIL, email);
+                    params.put(Const.KEY_PASSWORD, password);
 
-                Log.e("Param Response", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+                    Log.e("Param Response", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
+
+        } else {
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -190,14 +182,12 @@ public class OTPscreenActivity extends RootActivity {
 
     private void checkOTP(final String otpValue) {
 
-        prg.setMessage("Please Wait....");
-        prg.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Display the first 500 characters of the response string.
-                if (new CheckConnectivity().isConnected(context)) {
+        if (new CheckConnectivity().isConnected(context)) {
+            prg.setMessage("Please Wait....");
+            prg.show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
                     try {
                         prg.dismiss();
                         Log.e("Response : prince ", response);
@@ -213,62 +203,58 @@ public class OTPscreenActivity extends RootActivity {
                             } else {
                                 String msg = jsData.getString("msg");
                                 Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-
                             }
                         } else {
                             Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
-
                         }
                     } catch (Exception ex) {
-
                         ex.printStackTrace();
-
                     }
-                } else {
-                    Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                prg.dismiss();
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prg.dismiss();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                    Log.e("Error :", error.toString());
+                }
+            }) {
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                Log.e("Param header ", "" + header);
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header, "ABC98XYZ53IJ61L");
+                    // params.put("Accept-Language", "fr");
+                    Log.e("Param header ", "" + header);
 
-                return header;
-            }
+                    return header;
+                }
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("action", UtilsUrl.Action_OTPVerify);
-                params.put("email", email);
-                params.put("otp", otpValue);
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("action", UtilsUrl.Action_OTPVerify);
+                    params.put("email", email);
+                    params.put("otp", otpValue);
 
-                Log.e("Param Response", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+                    Log.e("Param Response", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
+        } else {
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
 
     }
 
     private void createIDS() {
         prg = new ProgressDialog(context);
-        btn_Apply = (Button) findViewById(R.id.btn_Apply);
-        edt_password = (EditText) findViewById(R.id.edt_password);
-        edt_confirm = (EditText) findViewById(R.id.edt_confirm);
-        edt_otp = (EditText) findViewById(R.id.edt_otp);
+        btn_Apply = findViewById(R.id.btn_Apply);
+        edt_password = findViewById(R.id.edt_password);
+        edt_confirm = findViewById(R.id.edt_confirm);
+        edt_otp = findViewById(R.id.edt_otp);
 
     }
 }

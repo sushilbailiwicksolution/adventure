@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.Order_Beans;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.Order_Beans;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 
 /**

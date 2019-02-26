@@ -19,9 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Database.DBOperation;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Database.DBfunction;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Database.Database_Utils;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbOperation;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DBfunction;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.Database_Utils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i++;
-             /*   boolean isSuccess = DBOperation.insertBooth(MainActivity.this,
+             /*   boolean isSuccess = DbOperation.insertBooth(MainActivity.this,
                         "" + i,
                         "Name",
                         "Consituency");*/
-                int raftExist = DBOperation.getRaftCount(MainActivity.this, "1");
+                int raftExist = DbOperation.getRaftCount(MainActivity.this, "1");
                 Log.e("raft count", "count : " + raftExist);
-                boolean isSuccess = DBOperation.insertRaftingCart(MainActivity.this,
+                boolean isSuccess = DbOperation.insertRaftingCart(MainActivity.this,
                         "1", "test", "name", "date", "tiem", "seat",
                         "", "", "ssaa", "ada", "ss",
                         "122", "" + 11, "image", "1","name","mobile","message","email");

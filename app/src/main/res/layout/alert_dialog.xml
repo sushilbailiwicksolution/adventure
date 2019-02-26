@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 -->
-        <rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.CustomDialog.SuccessTickView
+        <rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.custom_dialog.SuccessTickView
             android:id="@+id/success_tick"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

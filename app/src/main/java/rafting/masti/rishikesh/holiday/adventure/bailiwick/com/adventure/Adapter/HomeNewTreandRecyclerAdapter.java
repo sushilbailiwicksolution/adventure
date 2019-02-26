@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.newArrivalModal;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.newArrivalModal;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 
 

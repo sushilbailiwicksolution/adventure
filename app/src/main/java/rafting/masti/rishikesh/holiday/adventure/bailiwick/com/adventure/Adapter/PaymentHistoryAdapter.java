@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.PaymentHistory;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.PaymentHistory;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 
 public class PaymentHistoryAdapter extends RecyclerView.Adapter<PaymentHistoryAdapter.ViewHolder> {

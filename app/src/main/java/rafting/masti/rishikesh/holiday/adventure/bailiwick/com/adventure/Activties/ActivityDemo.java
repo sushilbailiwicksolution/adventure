@@ -1,31 +1,6 @@
 package rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import dmax.dialog.SpotsDialog;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.ProductListBean;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.RootActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
 
 /**
  * Created by Prince on 06-03-2018.

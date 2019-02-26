@@ -2,14 +2,12 @@ package rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activt
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,16 +23,15 @@ import java.util.Map;
 import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.EnquiryHistoryAdapter;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.PaymentHistoryAdapter;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.PaymentHistory;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.PaymentHistory;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.RootActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 
 /**
  * Created by Prince on 05-10-2018.

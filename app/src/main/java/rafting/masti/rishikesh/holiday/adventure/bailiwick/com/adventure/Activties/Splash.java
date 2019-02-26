@@ -10,8 +10,8 @@ import com.viksaa.sssplash.lib.model.ConfigSplash;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.ActivityVendor.Activity_VendorDashboard;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.loginRegister.LoginRegisterActivity;
 
 

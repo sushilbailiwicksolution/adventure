@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,17 +32,20 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.ActivityVendor.Activity_VendorDashboard;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.HomePage;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.OTPscreenActivity;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Database.DBOperation;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbOperation;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Commons;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Const;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.dialog.ForgetDialog;
 
 
@@ -69,23 +71,24 @@ public class LoginTab extends Fragment {
         context = getActivity();
         createIDS();
         clickEvent();
-        DBOperation.deleteAll_Cart(getActivity());
+        DbOperation.deleteAll_Cart(getActivity());
         getHashKey();
         return rootView;
     }
 
     private void getHashKey() {
         try {
-            PackageInfo info = getActivity().getPackageManager().getPackageInfo("rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure", PackageManager.GET_SIGNATURES);
+            PackageInfo info = Objects.requireNonNull(getActivity()).getPackageManager()
+                    .getPackageInfo("rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
         } catch (PackageManager.NameNotFoundException e) {
-
+            e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -93,7 +96,7 @@ public class LoginTab extends Fragment {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Validate();
+                validate();
 
             }
         });
@@ -101,8 +104,6 @@ public class LoginTab extends Fragment {
             @Override
             public void onClick(View v) {
                 showforgetDialog();
-
-
             }
         });
     }
@@ -115,12 +116,11 @@ public class LoginTab extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!dialog.edt_email.getText().toString().equalsIgnoreCase("")) {
-                    checkeMail(dialog.edt_email.getText().toString(),dialog);
-
-                } else {
+                    checkMail(dialog.edt_email.getText().toString(), dialog);
+                } else if(!Commons.isValidEmail(dialog.edt_email.getText().toString().trim())){
+                    dialog.edt_email.setError("Email Pattern is Invalid");
+                }else{
                     dialog.edt_email.setError("Mandatory");
-
-
                 }
             }
         });
@@ -132,15 +132,14 @@ public class LoginTab extends Fragment {
         });
     }
 
-    private void checkeMail(final String email, final ForgetDialog dialog) {
-        prg.setMessage("Please Wait....");
-        prg.show();
+    private void checkMail(final String email, final ForgetDialog dialog) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Display the first 500 characters of the response string.
-                if (new CheckConnectivity().isConnected(context)) {
+        if (new CheckConnectivity().isConnected(context)) {
+            prg.setMessage("Please Wait....");
+            prg.show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
                     try {
                         prg.dismiss();
                         Log.e("Response : prince ", response);
@@ -151,89 +150,80 @@ public class LoginTab extends Fragment {
 
                                 String msg = jsData.getString("msg");
                                 Intent i = new Intent(getActivity(), OTPscreenActivity.class);
-                                i.putExtra("email",email);
+                                i.putExtra("email", email);
                                 startActivity(i);
                                 dialog.dismiss();
                             } else {
                                 String msg = jsData.getString("msg");
                                 Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-
                             }
                         } else {
                             Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
-
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
-
                     }
-                } else {
-                    Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                prg.dismiss();
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prg.dismiss();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    Log.e("Error :", error.toString());
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<String, String>();
+                    header.put(Itags.Header, Const.APP_TOKEN);
+                    // params.put("Accept-Language", "fr");
+                    Log.e("Param header ", "" + header);
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                    return header;
+                }
 
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                Log.e("Param header ", "" + header);
-
-                return header;
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("action", UtilsUrl.Action_forgetPassword);
-                params.put("email", email);
-                Log.e("Param Response", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
-
-    }
-
-    private void Validate() {
-
-        if (edit_text_email_signin.getText().toString().trim().equalsIgnoreCase("")) {
-
-            edit_text_email_signin.setError("Mandatory");
-            return;
-        } else if (edit_text_password_signin.getText().toString().trim().equalsIgnoreCase("")) {
-            edit_text_email_signin.setError("Mandatory");
-            return;
-
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(Const.KEY_ACTION, UtilsUrl.Action_forgetPassword);
+                    params.put(Const.KEY_EMAIL, email);
+                    Log.e("Param Response", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
         } else {
-           /* Intent i = new Intent(getActivity(), HomePage.class);
-            startActivity(i);*/
-
-            LoginApi(edit_text_email_signin.getText().toString().trim(), edit_text_password_signin.getText().toString().trim(), "0");
-
-
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
         }
+
+    }
+
+    private void validate() {
+        String email = edit_text_email_signin.getText().toString().trim();
+        String pass = edit_text_password_signin.getText().toString().trim();
+
+        if (email.equalsIgnoreCase("")) {
+            edit_text_email_signin.setError("Email is Required");
+        } else if (pass.equalsIgnoreCase("")) {
+            edit_text_password_signin.setError("Password is Required");
+        } else if(!Commons.isValidEmail(email)){
+            Toast.makeText(context, "Email Format invalid", Toast.LENGTH_SHORT).show();
+        }else{
+            login(email, pass);
+        }
+
     }
 
 
-    private void LoginApi(final String email, final String password, final String LoginType) {
-        prg.setMessage("Please Wait....");
-        prg.show();
+    private void login(final String email, final String password) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Display the first 500 characters of the response string.
-                if (new CheckConnectivity().isConnected(context)) {
+        if (new CheckConnectivity().isConnected(context)) {
+            prg.setMessage("Please Wait....");
+            prg.show();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
                     try {
                         prg.dismiss();
                         Log.e("Response : prince ", response);
@@ -244,67 +234,61 @@ public class LoginTab extends Fragment {
 
                                 String msg = jsData.getString("msg");
                                 Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-
                                 JSONObject data = jsData.getJSONObject("data");
+                                saveDetail(jsData, email);
 
-                                SaveDetal(jsData, email);
                             } else {
                                 String msg = jsData.getString("msg");
                                 Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-
                             }
                         } else {
                             Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
-
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
-
                     }
-                } else {
-                    Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                prg.dismiss();
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prg.dismiss();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                    Log.e("Error :", error.toString());
+                }
+            }) {
 
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                Log.e("Param header ", "" + header);
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header, Const.APP_TOKEN);
+                    // params.put("Accept-Language", "fr");
+                    Log.e("Param header ", "" + header);
+                    return header;
+                }
 
-                return header;
-            }
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put(Const.KEY_ACTION, UtilsUrl.Action_Login);
+                    params.put(Const.KEY_EMAIL, email);
+                    params.put(Const.KEY_PASSWORD, password);
+                    params.put(Const.KEY_ISSOCIAL, "0");
 
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                    Log.e("Param Response", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
 
-                params.put("action", UtilsUrl.Action_Login);
-
-                params.put("email", email);
-                params.put("password", password);
-                params.put("isSocial", LoginType);
-
-                Log.e("Param Response", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+        } else {
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
 
 
     }
 
-    private void SaveDetal(JSONObject jsData, String email) {
+    private void saveDetail(JSONObject jsData, String email) {
         try {
             JSONObject data = jsData.getJSONObject("data");
             SharedPref.saveLogin(true);
@@ -319,19 +303,17 @@ public class LoginTab extends Fragment {
             if (data.getString("user_type").equalsIgnoreCase(Itags.Customer)) {
                 Intent i = new Intent(getActivity(), HomePage.class);
                 startActivity(i);
-                getActivity().finish();
+                Objects.requireNonNull(getActivity()).finish();
 
             } else if (data.getString("user_type").equalsIgnoreCase(Itags.VENDOR)) {
                 Intent i = new Intent(getActivity(), Activity_VendorDashboard.class);
                 startActivity(i);
-                getActivity().finish();
-
+                Objects.requireNonNull(getActivity()).finish();
             }
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     private void createIDS() {

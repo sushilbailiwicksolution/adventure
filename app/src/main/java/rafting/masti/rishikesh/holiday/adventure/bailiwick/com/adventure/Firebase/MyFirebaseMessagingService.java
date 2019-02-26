@@ -14,7 +14,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.HomePage;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.loginRegister.LoginRegisterActivity;
 
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
 
 public class ContactUsActivity extends AppCompatActivity implements View.OnClickListener {
 

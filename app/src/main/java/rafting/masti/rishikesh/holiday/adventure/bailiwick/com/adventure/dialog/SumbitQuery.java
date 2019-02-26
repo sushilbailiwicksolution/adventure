@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
 
 /**
  * Created by Prince on 29-12-2017.

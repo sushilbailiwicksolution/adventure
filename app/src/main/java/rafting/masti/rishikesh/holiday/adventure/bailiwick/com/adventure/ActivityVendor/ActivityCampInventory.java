@@ -38,13 +38,13 @@ import java.util.Map;
 import dmax.dialog.SpotsDialog;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.CampInventoryListRecyclerAdapter;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.CampInventory_Beans;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.CampInventoryBeans;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.RootActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 
 /**
  * Created by Prince on 05-03-2018.
@@ -57,7 +57,7 @@ public class ActivityCampInventory extends RootActivity implements CampInventory
 
     Spinner spinner_Select_camp;
     RecyclerView recyclerViewCamp_inventory;
-    ArrayList<CampInventory_Beans> camp_inventoryList;
+    ArrayList<CampInventoryBeans> camp_inventoryList;
     CampInventoryListRecyclerAdapter campInventoryListRecyclerAdapter;
 
     private TextView txt_prev_date_schedule, txt_next_date_schedule;
@@ -290,7 +290,7 @@ public class ActivityCampInventory extends RootActivity implements CampInventory
                                             Log.e("date", "" + NextToDate);
                                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                             String str_date = format.format(NextToDate);
-                                            camp_inventoryList.add(new CampInventory_Beans(
+                                            camp_inventoryList.add(new CampInventoryBeans(
                                                     jsCampInventory.getJSONObject(i).getString("room_type"),
                                                     "" + str_date, dayOfTheWeek, jsCampInventory.getJSONObject(i).getString("total_rooms")
                                                     , jsCampInventory.getJSONObject(i).getString("available_rooms"),

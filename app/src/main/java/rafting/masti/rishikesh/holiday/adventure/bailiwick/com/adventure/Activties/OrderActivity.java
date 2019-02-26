@@ -27,13 +27,15 @@ import dmax.dialog.SpotsDialog;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.User_OrderAdapter;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.Vendor_BookingAdapter;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.Order_Beans;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.Order_Beans;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.RootActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Commons;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Const;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 
 /**
  * Created by Prince on 05-10-2018.
@@ -61,54 +63,53 @@ public class OrderActivity extends RootActivity implements Vendor_BookingAdapter
 
     private void getDetail() {
 
-        prog.setTitle("Please wait.");
-        prog.show();
+        if (new CheckConnectivity().isConnected(context)) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        if (new CheckConnectivity().isConnected(context)) {
-                            try {
-                                prog.dismiss();
-                                Log.e("Response Order History ", response);
-                                if (response != null) {
-                                    JSONObject jsData = new JSONObject(response);
-                                    vendorListBooking.clear();
-                                    String status = jsData.getString("status");
+            prog.setTitle("Please wait.");
+            prog.show();
 
-                                    if (status.equalsIgnoreCase("1")) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
 
-                                        JSONArray jsRaftInventory = jsData.getJSONArray("order_history_details");
-                                        vendorListBooking.clear();
+                    try {
+                        prog.dismiss();
+                        Log.e("Response Order History ", response);
+                        if (response != null) {
+                            JSONObject jsData = new JSONObject(response);
+                            vendorListBooking.clear();
+                            String status = jsData.getString("status");
 
-                                        for (int i = 0; i < jsRaftInventory.length(); i++) {
+                            if (status.equalsIgnoreCase("1")) {
 
-                                            int personCount = Integer.parseInt(jsRaftInventory.getJSONObject(i).getString("adult")
-                                                    + Integer.parseInt(jsRaftInventory.getJSONObject(i).getString("children_blow_5_year"))
-                                                    + Integer.parseInt(jsRaftInventory.getJSONObject(i).getString("children_above_5_year")));
+                                JSONArray jsRaftInventory = jsData.getJSONArray("order_history_details");
+                                vendorListBooking.clear();
+                                for (int i = 0; i < jsRaftInventory.length(); i++) {
 
-                                            vendorListBooking.add(new Order_Beans(
+                                    int personCount = Integer.parseInt(jsRaftInventory.getJSONObject(i).getString("adult")
+                                            + Integer.parseInt(jsRaftInventory.getJSONObject(i).getString("children_blow_5_year"))
+                                            + Integer.parseInt(jsRaftInventory.getJSONObject(i).getString("children_above_5_year")));
 
-                                                    jsRaftInventory.getJSONObject(i).getString("adventure_sport"),
-                                                    jsRaftInventory.getJSONObject(i).getString("user_name"),
-                                                    jsRaftInventory.getJSONObject(i).getString("user_email"),
-                                                    jsRaftInventory.getJSONObject(i).getString("mobile_no"),
-                                                    jsRaftInventory.getJSONObject(i).getString("package_name"),String.valueOf(personCount),
-                                                    jsRaftInventory.getJSONObject(i).getString("vendorName"),
-                                                    jsRaftInventory.getJSONObject(i).getString("booking_date"),
-                                                    jsRaftInventory.getJSONObject(i).getString("order_date"),
-                                                    jsRaftInventory.getJSONObject(i).getString("paymentStatus"),
-                                                    jsRaftInventory.getJSONObject(i).getString("starting_point_name"),
-                                                    jsRaftInventory.getJSONObject(i).getString("campName"),
-                                                    jsRaftInventory.getJSONObject(i).getString("adult"),
-                                                    jsRaftInventory.getJSONObject(i).getString("children_above_5_year"),
-                                                    jsRaftInventory.getJSONObject(i).getString("children_blow_5_year"),
-                                                    jsRaftInventory.getJSONObject(i).getString("check_in_date"),
-                                                    jsRaftInventory.getJSONObject(i).getString("check_out_date")
+                                    vendorListBooking.add(new Order_Beans(
 
-                                            ));
+                                            jsRaftInventory.getJSONObject(i).getString("adventure_sport"),
+                                            jsRaftInventory.getJSONObject(i).getString("user_name"),
+                                            jsRaftInventory.getJSONObject(i).getString("user_email"),
+                                            jsRaftInventory.getJSONObject(i).getString("mobile_no"),
+                                            jsRaftInventory.getJSONObject(i).getString("package_name"), String.valueOf(personCount),
+                                            jsRaftInventory.getJSONObject(i).getString("vendorName"),
+                                            jsRaftInventory.getJSONObject(i).getString("booking_date"),
+                                            jsRaftInventory.getJSONObject(i).getString("order_date"),
+                                            jsRaftInventory.getJSONObject(i).getString("paymentStatus"),
+                                            jsRaftInventory.getJSONObject(i).getString("starting_point_name"),
+                                            jsRaftInventory.getJSONObject(i).getString("campName"),
+                                            jsRaftInventory.getJSONObject(i).getString("adult"),
+                                            jsRaftInventory.getJSONObject(i).getString("children_above_5_year"),
+                                            jsRaftInventory.getJSONObject(i).getString("children_blow_5_year"),
+                                            jsRaftInventory.getJSONObject(i).getString("check_in_date"),
+                                            jsRaftInventory.getJSONObject(i).getString("check_out_date")
+
+                                    ));
 
                                             /*if (jsRaftInventory.getJSONObject(i).getString("adventure_sport").equalsIgnoreCase("camping")) {
                                                 vendorListBooking.add(new Order_Beans(
@@ -145,57 +146,56 @@ public class OrderActivity extends RootActivity implements Vendor_BookingAdapter
                                             } else {
                                                 Toast.makeText(context, "Nothing Special For You", Toast.LENGTH_SHORT).show();
                                             }*/
-                                        }
-                                        setListAdapter(vendorListBooking);
-                                    } else {
-                                        String msg = jsData.getString("msg");
-                                        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-                                    }
-                                } else {
-                                    Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
                                 }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
+                                setListAdapter(vendorListBooking);
+                            } else {
+                                String msg = jsData.getString("msg");
+                                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
                         }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                prog.dismiss();
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prog.dismiss();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    Log.e("Error :", error.toString());
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header, Const.APP_TOKEN);
+                    // params.put("Accept-Language", "fr");
+                    return header;
+                }
 
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> header = new HashMap<>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                return header;
-            }
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("action", UtilsUrl.Action_orderHistory);
+                    params.put("user_id", SharedPref.getUserID());
 
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("action", UtilsUrl.Action_orderHistory);
-                params.put("user_id", SharedPref.getUserID());
+                    Log.e("Param Response ", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
 
-                Log.e("Param Response ", "" + params);
-                return params;
-            }
-        };
-
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+        } else {
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
 
 
     }
 
-    private void setListAdapter(List<Order_Beans> order_beansList){
-        recyclerview_inventory_history.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+    private void setListAdapter(List<Order_Beans> order_beansList) {
+        recyclerview_inventory_history.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         recyclerview_inventory_history.setAdapter(new User_OrderAdapter(context, order_beansList));
     }
 

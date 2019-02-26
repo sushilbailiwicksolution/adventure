@@ -12,13 +12,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="3dp"
             android:background="@drawable/border_gray"
             android:fontFamily="@font/myfont"
-            android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:padding="10dp"
-            android:text="Please Enter otp sent on Your Email"
+            android:text="Enter otp sent on Your Email"
             android:textAllCaps="true"
             android:textStyle="bold" />
 
@@ -26,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:padding="@dimen/dimen_5dp"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
@@ -40,6 +40,7 @@
                     android:hint="OTP XXXX"
                     android:inputType="number"
                     android:textColor="@color/black" />
+
             </android.support.design.widget.TextInputLayout>
 
 
@@ -49,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Password"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:textColor="@color/black" />
 
             <EditText
@@ -71,8 +72,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_button"
                 android:gravity="center"
-                android:text="Submit"
                 android:padding="5dp"
+                android:text="Submit"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
         </LinearLayout>

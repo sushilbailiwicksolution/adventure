@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.VendorBooking_Beans;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.VendorBooking_Beans;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 
 /**

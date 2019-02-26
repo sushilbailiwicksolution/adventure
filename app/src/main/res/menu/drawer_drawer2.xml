@@ -33,12 +33,12 @@
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_enquiry_history"
                 android:title="Enquiry" />
-            <item
+           <!-- <item
                 android:id="@+id/menu_payment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_payment"
-                android:title="Payment" />
+                android:title="Payment" />-->
 
             <item
                 android:id="@+id/Query"

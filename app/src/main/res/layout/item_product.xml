@@ -10,8 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        >
+        android:layout_height="170dp">
 
         <ImageView
             android:id="@+id/image_product_image"
@@ -108,9 +107,10 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tvWithMeal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Discount "
+                android:text="With Meal"
                 android:visibility="gone"
                 android:textSize="12sp"
                 android:textStyle="bold" />

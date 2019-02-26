@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.EnquiryHistory;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.EnquiryHistory;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 
 public class EnquiryHistoryAdapter extends RecyclerView.Adapter<EnquiryHistoryAdapter.EnquiryViewHolder> {

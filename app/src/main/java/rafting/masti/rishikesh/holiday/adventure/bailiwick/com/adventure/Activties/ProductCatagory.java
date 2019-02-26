@@ -17,7 +17,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -40,16 +39,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.ProductListRecyclerAdapter;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.ProductListBean;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Product.ProductViewActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.ProductListBean;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.product.ProductViewActivity;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.RootActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
-import dmax.dialog.SpotsDialog;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Const;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 
 public class ProductCatagory extends RootActivity implements ProductListRecyclerAdapter.ItemClickRecListInterface {
 
@@ -80,7 +80,6 @@ public class ProductCatagory extends RootActivity implements ProductListRecycler
 
     private void getDetail() {
         Bundle extras = getIntent().getExtras();
-        String userName;
 
         if (extras != null) {
             service_id = extras.getString("masterId");
@@ -88,10 +87,9 @@ public class ProductCatagory extends RootActivity implements ProductListRecycler
             masterType = extras.getString("masterType");
             str_Banner = extras.getString("masterImage");
             txt_tittle.setText(tittle);
-            img_banner = (KenBurnsView) findViewById(R.id.img_banner);
+            img_banner = findViewById(R.id.img_banner);
 
             Glide.with(context).load("http://bailiwicksolution.com/adventure" + str_Banner).error(R.drawable.camp_banner).into(img_banner);
-
             // and get whatever type user account id is
             createList(service_id);
 
@@ -110,19 +108,16 @@ public class ProductCatagory extends RootActivity implements ProductListRecycler
     private void ShowDialogfilter() {
         Holder holder;
         holder = new ViewHolder(R.layout.filter_content);
-        showOnlyContentDialog(holder, Gravity.BOTTOM, clickListener, dismissListener, seeklistner, true);
+        showOnlyContentDialog(holder, clickListener);
     }
 
     OnClickListener clickListener = new OnClickListener() {
         @Override
         public void onClick(DialogPlus dialog, View view) {
             switch (view.getId()) {
-
                 case R.id.like_it_button:
                     Toast.makeText(ProductCatagory.this, "We're glad that you like it", Toast.LENGTH_LONG).show();
                     break;
-
-
             }
             dialog.dismiss();
         }
@@ -131,7 +126,7 @@ public class ProductCatagory extends RootActivity implements ProductListRecycler
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-            CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) findViewById(R.id.rangeSeekbar5);
+            CrystalRangeSeekbar rangeSeekbar = findViewById(R.id.rangeSeekbar5);
             rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
                 @Override
                 public void finalValue(Number minValue, Number maxValue) {
@@ -157,10 +152,10 @@ public class ProductCatagory extends RootActivity implements ProductListRecycler
         }
     };
 
-    private void showOnlyContentDialog(Holder holder, int gravity, OnClickListener clickListener, OnDismissListener dismissListener, SeekBar.OnSeekBarChangeListener seeklistner, boolean expanded) {
+    private void showOnlyContentDialog(Holder holder, OnClickListener clickListener) {
         final DialogPlus dialog = DialogPlus.newDialog(this)
                 .setContentHolder(holder)
-                .setGravity(gravity)
+                .setGravity(Gravity.BOTTOM)
 
                 .setOnItemClickListener(new OnItemClickListener() {
                     @Override
@@ -170,7 +165,7 @@ public class ProductCatagory extends RootActivity implements ProductListRecycler
                     }
                 })
 
-                .setExpanded(expanded)
+                .setExpanded(true)
                 .setOnClickListener(clickListener)
                 .setCancelable(true)
 
@@ -183,7 +178,6 @@ public class ProductCatagory extends RootActivity implements ProductListRecycler
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-
                 if (newState == 0) {
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -192,124 +186,110 @@ public class ProductCatagory extends RootActivity implements ProductListRecycler
                             ll_filtersort.setVisibility(View.GONE);
                         }
                     }, FILTER_SORT_TIME_OUT);
-
                 } else {
                     ll_filtersort.setVisibility(View.VISIBLE);
                 }
-
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
             }
         });
     }
 
-
     private void createList(final String service_id) {
-        prog.setTitle("Loading Please wait.");
-        prog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        if (new CheckConnectivity().isConnected(context)) {
-                            try {
-                                prog.dismiss();
-                                Log.e("Response : prince ", response);
-                                if (response != null) {
-                                    JSONObject jsData = new JSONObject(response);
-                                    String status = jsData.getString("status");
-                                    if (status.equalsIgnoreCase("1")) {
+        if (new CheckConnectivity().isConnected(context)) {
+            prog.setTitle("Loading Please wait.");
+            prog.show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        prog.dismiss();
+                        Log.e("Response : prince ", response);
+                        if (response != null) {
+                            JSONObject jsData = new JSONObject(response);
+                            String status = jsData.getString("status");
+                            if (status.equalsIgnoreCase("1")) {
 
-                                        JSONArray jsArray = jsData.getJSONArray("services");
-                                        for (int i = 0; i < jsArray.length(); i++) {
-                                            productListBeanList.add(new ProductListBean(
-                                                    jsArray.getJSONObject(i).getString("package_id"),
-                                                    jsArray.getJSONObject(i).getString("package_name"),
-                                                    jsArray.getJSONObject(i).getString("service_name"),
-                                                    jsArray.getJSONObject(i).getString("service_id"),
-                                                    jsArray.getJSONObject(i).getString("short_description"),
-                                                    jsArray.getJSONObject(i).getString("description"),
-                                                    jsArray.getJSONObject(i).getString("country"),
-                                                    jsArray.getJSONObject(i).getString("city"),
-                                                    jsArray.getJSONObject(i).getString("state"),
-                                                    jsArray.getJSONObject(i).getString("price"),
-                                                    jsArray.getJSONObject(i).getString("image"),
-                                                    jsArray.getJSONObject(i).getString("status"),
-                                                    false
-                                            ));
-
-
-                                        }
-
-                                        productListRecyclerAdapter.notifyDataSetChanged();
-
-                                    } else {
-                                        String msg = jsData.getString("msg");
-                                        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-
-                                    }
-                                } else {
-                                    Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
-
+                                JSONArray jsArray = jsData.getJSONArray("services");
+                                for (int i = 0; i < jsArray.length(); i++) {
+                                    productListBeanList.add(new ProductListBean(
+                                            jsArray.getJSONObject(i).getString("package_id"),
+                                            jsArray.getJSONObject(i).getString("package_name"),
+                                            jsArray.getJSONObject(i).getString("service_name"),
+                                            jsArray.getJSONObject(i).getString("service_id"),
+                                            jsArray.getJSONObject(i).getString("short_description"),
+                                            jsArray.getJSONObject(i).getString("description"),
+                                            jsArray.getJSONObject(i).getString("country"),
+                                            jsArray.getJSONObject(i).getString("city"),
+                                            jsArray.getJSONObject(i).getString("state"),
+                                            jsArray.getJSONObject(i).getString("price"),
+                                            jsArray.getJSONObject(i).getString("image"),
+                                            jsArray.getJSONObject(i).getString("status"),
+                                            false));
                                 }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
+                                productListRecyclerAdapter.notifyDataSetChanged();
 
+                            } else {
+                                String msg = jsData.getString("msg");
+                                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
                         }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                prog.dismiss();
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prog.dismiss();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    Log.e("Error :", error.toString());
+                }
+            }) {
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header, Const.APP_TOKEN);
+                    // params.put("Accept-Language", "fr");
+                    Log.e("Param header ", "" + header);
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                Log.e("Param header ", "" + header);
+                    return header;
+                }
 
-                return header;
-            }
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put(Const.KEY_ACTION, UtilsUrl.Action_VendorList);
+                    params.put("service_id", service_id);
+                    Log.e("Param Response ", "" + params);
+                    return params;
+                }
+            };
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+            AppController1.getInstance().addToRequestQueue(stringRequest);
 
-                params.put("action", UtilsUrl.Action_VendorList);
-                params.put("service_id", service_id);
-                Log.e("Param Response ", "" + params);
-                return params;
-            }
-        };
-
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+        } else {
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
 
 
     }
 
     private void createIDS() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar_cat);
+        toolbar = findViewById(R.id.toolbar_cat);
         toolbar.setTitle("Adventure");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-        ll_filtersort = (LinearLayout) findViewById(R.id.ll_filtersort);
-        ll_filter = (LinearLayout) findViewById(R.id.ll_filter);
+        ll_filtersort = findViewById(R.id.ll_filtersort);
+        ll_filter = findViewById(R.id.ll_filter);
 
-        recyclerview_product_catagory = (RecyclerView) findViewById(R.id.recyclerview_product_catagory);
+        recyclerview_product_catagory = findViewById(R.id.recyclerview_product_catagory);
         recyclerview_product_catagory.setNestedScrollingEnabled(false);
 
 
@@ -325,21 +305,18 @@ public class ProductCatagory extends RootActivity implements ProductListRecycler
 
         setSupportActionBar(toolbar);
         prog = new SpotsDialog(this, R.style.Custom);
-        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("Adventure");
 
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsingToolbarLayoutTitleColor);
 //
-        txt_tittle = (TextView) findViewById(R.id.txt_tittle);
+        txt_tittle = findViewById(R.id.txt_tittle);
     }
 
 
     @Override
     public void onItemClick(int position) {
-
-
-
 
         Intent i = new Intent(ProductCatagory.this, ProductViewActivity.class);
         i.putExtra("masterType", masterType);

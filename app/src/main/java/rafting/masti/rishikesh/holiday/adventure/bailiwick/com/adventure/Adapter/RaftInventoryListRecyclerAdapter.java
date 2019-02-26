@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Modal.RaftingInventory_Beans;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.RaftingInventoryBeans;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 
 /**
@@ -21,7 +21,7 @@ import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 public class RaftInventoryListRecyclerAdapter extends RecyclerView.Adapter<RaftInventoryListRecyclerAdapter.ViewHolder> {
 
     Context context;
-    List<RaftingInventory_Beans> campInventoryListBeanList;
+    List<RaftingInventoryBeans> campInventoryListBeanList;
     Activity activity;
 
     private ItemClickMasterMenuListInterface itemClickListener;
@@ -31,7 +31,7 @@ public class RaftInventoryListRecyclerAdapter extends RecyclerView.Adapter<RaftI
     }
 
 
-    public RaftInventoryListRecyclerAdapter(Context context, List<RaftingInventory_Beans> cartListBeanList, ItemClickMasterMenuListInterface itemClickRecListInterface) {
+    public RaftInventoryListRecyclerAdapter(Context context, List<RaftingInventoryBeans> cartListBeanList, ItemClickMasterMenuListInterface itemClickRecListInterface) {
         this.context = context;
         this.campInventoryListBeanList = cartListBeanList;
         itemClickListener = itemClickRecListInterface;

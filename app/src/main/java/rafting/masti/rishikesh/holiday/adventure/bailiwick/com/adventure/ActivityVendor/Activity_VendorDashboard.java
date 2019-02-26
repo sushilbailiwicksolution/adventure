@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,25 +21,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import dmax.dialog.SpotsDialog;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.HomePage;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.DeviceOperation;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.MyBounceInterpolator;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.RootActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.DeviceOperation;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.MyBounceInterpolator;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.loginRegister.LoginRegisterActivity;
 
 /**
@@ -183,7 +177,7 @@ public class Activity_VendorDashboard extends RootActivity {
             @Override
             public void onAnimationEnd(Animation arg0) {
                 Log.e("it finish", "it finish");
-                Intent i = new Intent(Activity_VendorDashboard.this, ActivityRAftingInventory.class);
+                Intent i = new Intent(Activity_VendorDashboard.this, ActivityRaftingInventory.class);
                 startActivity(i);
             }
         });
@@ -201,12 +195,13 @@ public class Activity_VendorDashboard extends RootActivity {
 
         Log.e("Device Detail", deviceid + "  :  " + fcm);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        if (new CheckConnectivity().isConnected(mContext)) {
+        if (new CheckConnectivity().isConnected(mContext)) {
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Display the first 500 characters of the response string.
                             try {
                                 Log.e("Response : prince ", response);
                                 if (response != null) {
@@ -227,42 +222,43 @@ public class Activity_VendorDashboard extends RootActivity {
                                 ex.printStackTrace();
 
                             }
-                        } else {
-                            Toast.makeText(mContext, "Check Your connetion", Toast.LENGTH_LONG).show();
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, error.toString(), Toast.LENGTH_LONG).show();
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(mContext, error.toString(), Toast.LENGTH_LONG).show();
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                    Log.e("Error :", error.toString());
+                }
+            }) {
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> header = new HashMap<String, String>();
+                    header.put(Itags.Header, "ABC98XYZ53IJ61L");
+                    // params.put("Accept-Language", "fr");
 
 
-                return header;
-            }
+                    return header;
+                }
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
 
-                params.put("action", UtilsUrl.Action_userDetail);
-                params.put("user_id", SharedPref.getUserID());
-                params.put("fcm", fcm);
-                params.put("device_id", deviceid);
-                Log.e("Param Response ", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+                    params.put("action", UtilsUrl.Action_userDetail);
+                    params.put("user_id", SharedPref.getUserID());
+                    params.put("fcm", fcm);
+                    params.put("device_id", deviceid);
+                    Log.e("Param Response ", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
+
+        } else {
+            Toast.makeText(mContext, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
 
     }
 

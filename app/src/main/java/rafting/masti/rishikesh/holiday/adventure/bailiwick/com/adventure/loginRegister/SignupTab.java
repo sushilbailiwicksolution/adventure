@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,17 +27,18 @@ import java.util.Map;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.HomePage;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Commons;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Const;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 
 
 public class SignupTab extends Fragment {
 
     private EditText edt_mobile, edt_name, edt_Email, edt_password, edt_last_name;
     private Button btn_create_account;
-    View RootView;
     private Context context;
     ProgressDialog prg;
 
@@ -48,13 +49,14 @@ public class SignupTab extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        RootView = inflater.inflate(R.layout.signup_fragment, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.signup_fragment, container, false);
         context = getActivity();
-        createIDs();
+        createIDs(rootView);
         clickEvent();
 
-        return RootView;
+        return rootView;
     }
 
     private void clickEvent() {
@@ -71,124 +73,110 @@ public class SignupTab extends Fragment {
 
                 if (name.equalsIgnoreCase("")) {
                     edt_name.setError("Mandatory");
-                    return;
                 } else if (last_name.equalsIgnoreCase("")) {
                     edt_last_name.setError("Mandatory");
-                    return;
                 } else if (email.equalsIgnoreCase("")) {
                     edt_Email.setError("Mandatory");
-                    return;
                 } else if (password.equalsIgnoreCase("")) {
                     edt_password.setError("Mandatory");
-                    return;
                 } else if (password.length() < 6) {
-                    edt_password.setError("password must be of 6 Character ");
-                    return;
+                    edt_password.setError("Password must be of 6 Character ");
                 } else if (mobile.equalsIgnoreCase("")) {
                     edt_Email.setError("Mandatory");
-                    return;
-                } else if (mobile.length() != 10) {
-                    edt_mobile.setError("Number Should be 10 character");
-                    return;
-                } else {
-                    RegisterUser(email, name, password, mobile, last_name);
+                } else if (!Commons.isValidMobile(mobile)) {
+                    edt_mobile.setError("Invalid Mobile Number");
+                } else if(!Commons.isValidEmail(email)){
+                    edt_Email.setError("Invalid Email Format");
+                }else {
+                    registerUser(email, name, password, mobile, last_name);
                 }
             }
         });
     }
 
-    private void RegisterUser(final String email, final String name, final String password, final String mobile, final String Lastname) {
-        prg.setMessage("Please Wait....");
-        prg.show();
+    private void registerUser(final String email, final String name, final String password, final String mobile, final String lastname) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL,
-                new Response.Listener<String>() {
+        if (new CheckConnectivity().isConnected(context)) {
+            prg.setMessage("Please Wait....");
+            prg.show();
 
-            @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        if (new CheckConnectivity().isConnected(context)) {
-                            try {
-                                prg.dismiss();
-                                Log.e("Response : prince ", response);
-                                if (response != null) {
-                                    JSONObject jsData = new JSONObject(response);
-                                    String status = jsData.getString("status");
-                                    if (status.equalsIgnoreCase("1")) {
-
-                                        String msg = jsData.getString("msg");
-                                        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-                                        Intent i = new Intent(getActivity(), HomePage.class);
-                                        startActivity(i);
-
-                                    } else {
-                                        String msg = jsData.getString("msg");
-                                        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-
-                                    }
-                                } else {
-                                    Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
-
-                                }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    // Display the first 500 characters of the response string.
+                    try {
+                        prg.dismiss();
+                        Log.e("Response : prince ", response);
+                        if (response != null) {
+                            JSONObject jsData = new JSONObject(response);
+                            String status = jsData.getString("status");
+                            if (status.equalsIgnoreCase("1")) {
+                                String msg = jsData.getString("msg");
+                                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(getActivity(), HomePage.class);
+                                startActivity(i);
+                            } else {
+                                String msg = jsData.getString("msg");
+                                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
                         }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                prg.dismiss();
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prg.dismiss();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    Log.e("Error :", error.toString());
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header, Const.APP_TOKEN);
+                    // params.put("Accept-Language", "fr");
+                    Log.e("Param header ", "" + header);
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                    return header;
+                }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                Log.e("Param header ", "" + header);
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
 
-                return header;
-            }
+                    params.put(Const.KEY_ACTION, UtilsUrl.Action_register);
+                    params.put(Const.KEY_FNAME, name);
+                    params.put(Const.KEY_LNAME, lastname);
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+                    params.put(Const.KEY_EMAIL, email);
+                    params.put(Const.KEY_MOBILE, mobile);
+                    params.put(Const.KEY_PASSWORD, password);
+                    params.put(Const.KEY_ISSOCIAL, "0");
+                    params.put(Const.KEY_LOGIN_TYPE, "N");
 
-                params.put("action", UtilsUrl.Action_register);
-                params.put("fname", name);
-                params.put("lname", Lastname);
+                    Log.e("Param Response ", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
 
-                params.put("email", email);
-                params.put("mobile_no", mobile);
-                params.put("password", password);
-                params.put("isSocial", "0");
-                params.put("login_type", "N");
-
-                Log.e("Param Response ", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
-
-
+        } else {
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
     }
 
-    private void createIDs() {
+    private void createIDs(View rootView) {
         prg = new ProgressDialog(context);
-        edt_mobile = (EditText) RootView.findViewById(R.id.edt_mobile);
-        edt_name = (EditText) RootView.findViewById(R.id.edt_name);
-        edt_last_name = (EditText) RootView.findViewById(R.id.edt_last_name);
-        edt_password = (EditText) RootView.findViewById(R.id.edt_password);
-        edt_Email = (EditText) RootView.findViewById(R.id.edt_Email);
-        btn_create_account = (Button) RootView.findViewById(R.id.btn_create_account);
-
+        edt_mobile = rootView.findViewById(R.id.edt_mobile);
+        edt_name = rootView.findViewById(R.id.edt_name);
+        edt_last_name = rootView.findViewById(R.id.edt_last_name);
+        edt_password = rootView.findViewById(R.id.edt_password);
+        edt_Email = rootView.findViewById(R.id.edt_Email);
+        btn_create_account = rootView.findViewById(R.id.btn_create_account);
     }
+
 }

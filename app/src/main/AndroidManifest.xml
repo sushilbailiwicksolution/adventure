@@ -6,13 +6,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".App.AppController1"
@@ -23,6 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".terms.TermsActivity"></activity>
+        <activity android:name=".biking.BikingActivity" />
+        <activity android:name=".bungy_jump.BungeeJumpActivity" />
+        <activity android:name=".cycling.CyclingActivity" />
         <activity android:name=".Activties.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Camp.CampMasterActivity"
+            android:name=".camp.CampMasterActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".loginRegister.LoginRegisterActivity"
@@ -41,7 +42,7 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Product.ProductViewActivity"
+            android:name=".product.ProductViewActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged" />
         <activity
@@ -51,10 +52,10 @@
             android:name=".Activties.ProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Rafting.RaftingActivity"
+            android:name=".rafting.RaftingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Camp.Camp_viewActivity"
+            android:name=".camp.Camp_viewActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activties.CartList"
@@ -72,7 +73,7 @@
             android:name=".ActivityVendor.Activity_camp_Room_control"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityVendor.ActivityRAftingInventory"
+            android:name=".ActivityVendor.ActivityRaftingInventory"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityVendor.Activity_Raft_Seat_Control"
@@ -83,7 +84,19 @@
         <activity
             android:name=".Activties.OTPscreenActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".Activties.OrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activties.EnquiryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activties.PaymentQueryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".biking.BikingConfirmationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged" />
         <!--
               <activity
               android:name=".EnquiryForms.EnquiryForm1"
@@ -95,10 +108,8 @@
             android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <!-- facebook -->
+            android:value="@integer/google_play_services_version" /> <!-- facebook -->
         <!-- Notification Services -->
-
         <service android:name=".Firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -122,19 +133,18 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
-        <meta-data
+        <!--
+  <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        -->
         <!-- End zNotification Services -->
         <!-- Pay U Money -->
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="fabaabc4273e4e67d52a5410e9b2fa7a59088976" />
-
-        <!-- Pay u money end -->
-
+            android:value="fabaabc4273e4e67d52a5410e9b2fa7a59088976" /> <!-- Pay u money end -->
         <activity android:name=".Activties.ContactUsActivity" />
-        <activity android:name=".Activties.AboutRafting"></activity>
+        <activity android:name=".Activties.AboutRafting" />
     </application>
 
 </manifest>

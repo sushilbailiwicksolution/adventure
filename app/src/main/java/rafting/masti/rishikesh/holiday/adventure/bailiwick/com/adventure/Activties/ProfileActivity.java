@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -38,20 +37,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.AppUtils.UtilsUrl;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Firebase.MyFirebaseInstanceIDService;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Session.SharedPref;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.CheckConnectivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Support.RootActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Utils.Itags;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Commons;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Const;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
 
 /**
  * Created by Prince on 22-11-2017.
  */
 
 public class ProfileActivity extends RootActivity {
-    private EditText edit_text_first_name_signup, edit_text_last_name_signup, edit_text_email_signup, edit_text_mobile_signup, edit_Address;
+
+    private EditText edit_text_first_name_signup, edit_text_last_name_signup, edit_text_email_signup,
+            edit_text_mobile_signup, edit_Address;
     private Button btn_save_profile;
     private ImageView img_profile;
     // Image Setup
@@ -80,8 +83,6 @@ public class ProfileActivity extends RootActivity {
         createIDs();
         setData();
         clickListner();
-
-
     }
 
     private void clickListner() {
@@ -96,49 +97,42 @@ public class ProfileActivity extends RootActivity {
             public void onClick(View view) {
                 String fName, lName, email, mobile, address;
 
-
                 fName = edit_text_first_name_signup.getText().toString().trim();
                 lName = edit_text_last_name_signup.getText().toString().trim();
                 email = edit_text_email_signup.getText().toString().trim();
                 mobile = edit_text_mobile_signup.getText().toString().trim();
                 address = edit_Address.getText().toString().trim();
+
                 if (fName.equalsIgnoreCase("")) {
-                    edit_text_first_name_signup.setError("Requried");
-                    return;
-
+                    edit_text_first_name_signup.setError("Required");
                 } else if (lName.equalsIgnoreCase("")) {
-                    edit_text_last_name_signup.setError("Requried");
-                    return;
-
+                    edit_text_last_name_signup.setError("Required");
                 } else if (email.equalsIgnoreCase("")) {
-                    edit_text_email_signup.setError("Requried");
-                    return;
-
+                    edit_text_email_signup.setError("Required");
                 } else if (!emailValidator(email)) {
                     edit_text_email_signup.setError("Invalid Email");
-                    return;
-
                 } else if (email.equalsIgnoreCase("")) {
-                    edit_text_mobile_signup.setError("Requried");
-                    return;
-
+                    edit_text_mobile_signup.setError("Required");
+                } else if (!Commons.isValidMobile(mobile)) {
+                    edit_text_mobile_signup.setError("Invalid Mobile Number");
+                } else if (address.equalsIgnoreCase("")) {
+                    edit_Address.setError("Address Field is Required");
                 } else {
-                    UpdateUserDetail(fName, lName, email, mobile, address, USER_ID);
+                    updateUserDetail(fName, lName, email, mobile, address, USER_ID);
                 }
             }
         });
     }
 
-    private void UpdateUserDetail(final String fName, final String lName, String email, final String mobile, final String address, String user_id) {
-        prg.setMessage("Please Wait....");
-        prg.show();
+    private void updateUserDetail(final String fName, final String lName, String email, final String mobile, final String address, String user_id) {
 
+        if (new CheckConnectivity().isConnected(context)) {
+            prg.setMessage("Please Wait....");
+            prg.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Display the first 500 characters of the response string.
-                if (new CheckConnectivity().isConnected(context)) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
                     try {
                         prg.dismiss();
                         Log.e("Response : prince ", response);
@@ -146,71 +140,63 @@ public class ProfileActivity extends RootActivity {
                             JSONObject jsData = new JSONObject(response);
                             String status = jsData.getString("status");
                             if (status.equalsIgnoreCase("1")) {
-
                                 String msg = jsData.getString("msg");
                                 Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-                                GetUserDetail(getDeviceDetail(), getFcmkey());
-
-                                // here i have to code
+                                getUserDetail(getDeviceDetail(), getFcmkey());
                             } else {
                                 String msg = jsData.getString("msg");
-
                             }
                         } else {
                             Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
-
                         }
                     } catch (Exception ex) {
                         prg.dismiss();
                         ex.printStackTrace();
-
                     }
-                } else {
-                    Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                prg.dismiss();
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prg.dismiss();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                    Log.e("Error :", error.toString());
+                }
+            }) {
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                Log.e("Param header ", "" + header);
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header, Const.APP_TOKEN);
+                    // params.put("Accept-Language", "fr");
+                    Log.e("Param header ", "" + header);
+                    return header;
+                }
 
-                return header;
-            }
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+                    params.put(Const.KEY_ACTION, UtilsUrl.Action_UpdateProfile);
+                    params.put(Const.KEY_USER_ID, SharedPref.getUserID());
+                    params.put(Const.KEY_FNAME, fName);
+                    params.put(Const.KEY_LNAME, lName);
+                    params.put(Const.KEY_MOBILE, mobile);
+                    params.put(Const.KEY_ADDRESS, address);
 
-                params.put("action", UtilsUrl.Action_UpdateProfile);
-                params.put("user_id", SharedPref.getUserID());
-                params.put("fname", fName);
-                params.put("lname", lName);
-                params.put("mobile_no", mobile);
-                params.put("address", address);
-
-
-                Log.e("Param Response ", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
-
+                    Log.e("Param Response ", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
+        } else {
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
 
     }
 
     private void setData() {
+
         USER_ID = SharedPref.getUserID();
         edit_text_first_name_signup.setText(SharedPref.getFirstName());
         edit_text_last_name_signup.setText(SharedPref.getLastName());
@@ -223,93 +209,87 @@ public class ProfileActivity extends RootActivity {
         if (!profile_url.equalsIgnoreCase("")) {
             Glide.with(context).load(UtilsUrl.IMAGEBASE_URL + SharedPref.getprofileURL()).error(R.drawable.icon_profile_9).into(img_profile);
             Log.e("Full Path : - ", UtilsUrl.IMAGEBASE_URL + SharedPref.getprofileURL());
-
             // Glide.with(context).load("http://indianadventurepackages.com/profile_pic/profile_pic_15369101297390750.jpg").error(R.drawable.icon_profile_9).into(img_profile);
-
-
         }
     }
 
     private void createIDs() {
         prg = new ProgressDialog(context);
-        edit_text_first_name_signup = (EditText) findViewById(R.id.edit_text_first_name_signup);
-        edit_text_last_name_signup = (EditText) findViewById(R.id.edit_text_last_name_signup);
-        edit_text_email_signup = (EditText) findViewById(R.id.edit_text_email_signup);
-        edit_text_mobile_signup = (EditText) findViewById(R.id.edit_text_mobile_signup);
-        edit_Address = (EditText) findViewById(R.id.edit_Address);
-        btn_save_profile = (Button) findViewById(R.id.btn_save_profile);
-        img_profile = (ImageView) findViewById(R.id.img_profile);
+        edit_text_first_name_signup = findViewById(R.id.edit_text_first_name_signup);
+        edit_text_last_name_signup = findViewById(R.id.edit_text_last_name_signup);
+        edit_text_email_signup = findViewById(R.id.edit_text_email_signup);
+        edit_text_mobile_signup = findViewById(R.id.edit_text_mobile_signup);
+        edit_Address = findViewById(R.id.edit_Address);
+        btn_save_profile = findViewById(R.id.btn_save_profile);
+        img_profile = findViewById(R.id.img_profile);
 
     }
 
-    private void GetUserDetail(final String deviceid, final String fcm) {
+    private void getUserDetail(final String deviceid, final String fcm) {
 
+        if (new CheckConnectivity().isConnected(context)) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Display the first 500 characters of the response string.
-                if (new CheckConnectivity().isConnected(context)) {
+            prg.setMessage("Please Wait....");
+            prg.show();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    prg.dismiss();
                     try {
                         Log.e("Response : prince ", response);
                         if (response != null) {
                             JSONObject jsData = new JSONObject(response);
                             String status = jsData.getString("status");
                             if (status.equalsIgnoreCase("1")) {
-                                SaveDetal(jsData);
-
+                                saveDetails(jsData);
                             } else {
                                 String msg = jsData.getString("msg");
-
                             }
                         } else {
                             Toast.makeText(context, "Invalid Response !!!", Toast.LENGTH_LONG).show();
-
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
-
                     }
-                } else {
-                    Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prg.dismiss();
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    Log.e("Error :", error.toString());
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header, Const.APP_TOKEN);
+                    // params.put("Accept-Language", "fr");
+                    Log.e("Param header ", "" + header);
+                    return header;
+                }
 
-                Log.e("Error :", error.toString());
-            }
-        }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put(Const.KEY_ACTION, UtilsUrl.Action_userDetail);
+                    params.put(Const.KEY_USER_ID, SharedPref.getUserID());
+                    params.put(Const.KEY_FCM, fcm);
+                    params.put(Const.KEY_DEVICE_ID, deviceid);
+                    Log.e("Param Response ", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-                Log.e("Param header ", "" + header);
-
-                return header;
-            }
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("action", UtilsUrl.Action_userDetail);
-                params.put("user_id", SharedPref.getUserID());
-                params.put("fcm", fcm);
-                params.put("device_id", deviceid);
-                Log.e("Param Response ", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+        } else {
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
 
     }
 
-    private void SaveDetal(JSONObject jsData) {
+    private void saveDetails(JSONObject jsData) {
         try {
             JSONObject data = jsData.getJSONObject("data");
 
@@ -321,13 +301,12 @@ public class ProfileActivity extends RootActivity {
 
             if (!data.getString("profile_pic").equalsIgnoreCase("")) {
                 SharedPref.saveprofileURL(data.getString("profile_pic"));
-
             }
             SharedPref.savegender(data.getString("gender"));
             SharedPref.saveAddress(data.getString("address"));
             SharedPref.saveCity(data.getString("city"));
-
             setData();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -336,7 +315,6 @@ public class ProfileActivity extends RootActivity {
 
     private void profile_pic_update() {
         CropImage.startPickImageActivity(ProfileActivity.this);
-
     }
 
     private void startCropImageActivity(Uri imageUri) {
@@ -347,7 +325,6 @@ public class ProfileActivity extends RootActivity {
     @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         // handle result of pick image chooser
         if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
@@ -373,7 +350,7 @@ public class ProfileActivity extends RootActivity {
                     // Log.e("bitmapString",myBase64Image.toString()+"");
                     img_profile.setImageBitmap(bitmap);
                     //isImage_loaded = true;
-                    UploadImage(new SharedPref().getUserID());
+                    uploadImage(new SharedPref().getUserID());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -387,72 +364,68 @@ public class ProfileActivity extends RootActivity {
     }
 
 
-    private void UploadImage(final String user_id) {
-        Log.e("i m heree", "i 111");
-        prg.setMessage("Upload Image...");
-        prg.show();
+    private void uploadImage(final String user_id) {
+        Log.e("i m heree", "userid=> " + user_id);
+        if (new CheckConnectivity().isConnected(context)) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Display the first 500 characters of the response string.
-                try {
-                    prg.dismiss();
-                    Log.e("Response : prince ", response);
-                    //  Manage_data_login(response);
-                    JSONObject jsdata = new JSONObject(response);
-                    String msg = jsdata.getString("msg");
-                    String status = jsdata.getString("status");
-                    if (status.equalsIgnoreCase("1")) {
+            prg.setMessage("Upload Image...");
+            prg.show();
 
-                        GetUserDetail(getDeviceDetail(), getFcmkey());
-                    } else {
-                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, UtilsUrl.BASE_URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    // Display the first 500 characters of the response string.
+                    try {
+                        prg.dismiss();
+                        Log.e("Response : prince ", response);
+                        //  Manage_data_login(response);
+                        JSONObject jsdata = new JSONObject(response);
+                        String msg = jsdata.getString("msg");
+                        String status = jsdata.getString("status");
+                        if (status.equalsIgnoreCase("1")) {
+                            getUserDetail(getDeviceDetail(), getFcmkey());
+                        } else {
+                            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Pic upload failed please try again later", Toast.LENGTH_LONG).show();
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Pic upload failed please try again later", Toast.LENGTH_LONG).show();
-
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    prg.dismiss();
+                    Log.e("Error :", error.toString());
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put(Itags.Header,Const.APP_TOKEN);
+                    // params.put("Accept-Language", "fr")
+                    return header;
                 }
 
-            }
-        }, new Response.ErrorListener() {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put(Const.KEY_USER_ID, user_id);
+                    params.put(Const.KEY_PIC, "" + myBase64Image);
+                    params.put(Const.KEY_ACTION, UtilsUrl.Action_UpdateProfile_PIC);
+                    //   params.put("pic", "data:image/jpeg;base64," + myBase64Image);
+                    Log.e("user id ", "" + user_id);
+                    Log.e("action ", "" + UtilsUrl.Action_UpdateProfile_PIC);
+                    Log.e("pic", "" + myBase64Image);
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                prg.dismiss();
-
-                Log.e("Error :", error.toString());
-            }
-        }) {
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<String, String>();
-                header.put(Itags.Header, "ABC98XYZ53IJ61L");
-                // params.put("Accept-Language", "fr");
-
-
-                return header;
-            }
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("user_id", user_id);
-                params.put("pic", "" + myBase64Image);
-                params.put("action", UtilsUrl.Action_UpdateProfile_PIC);
-                //   params.put("pic", "data:image/jpeg;base64," + myBase64Image);
-                Log.e("user id ", "" + user_id);
-                Log.e("action ", "" + UtilsUrl.Action_UpdateProfile_PIC);
-                Log.e("pic", "" + myBase64Image);
-
-                Log.e("Param Response ", "" + params);
-                return params;
-            }
-        };
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+                    Log.e("Param Response ", "" + params);
+                    return params;
+                }
+            };
+            AppController1.getInstance().addToRequestQueue(stringRequest);
+        }else{
+            Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
+        }
     }
 
     public boolean emailValidator(String email) {

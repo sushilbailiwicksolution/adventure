@@ -24,15 +24,27 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/white"
                 android:gravity="center"
-                android:orientation="horizontal"
                 android:padding="7dp">
                 <Button
                     android:id="@+id/btn_book_now"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_margin="4dp"
                     android:background="@color/blue"
                     android:text="Book NOW"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnAddToCartTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:background="@color/blue"
+                    android:text="Add To Cart"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -242,9 +254,22 @@
         android:background="@color/white">
 
         <Button
-            android:id="@+id/btn_addToCart"
+            android:id="@+id/btnAddToCartBottom"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:background="@color/blue"
+            android:text="Add To Cart"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnBuyNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_margin="4dp"
             android:background="@color/blue"
             android:text="BUY NOW"
