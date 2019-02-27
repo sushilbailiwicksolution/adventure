@@ -25,6 +25,7 @@ public class TermsConditionsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_terms_conditions, container, false);
         getUiObject(view);
+        setToolbar();
 
         return view;
     }
@@ -35,7 +36,7 @@ public class TermsConditionsFragment extends Fragment {
 
     private void setToolbar(){
         toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.toolbar_main);
-        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle("About Us");
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle("Terms and Conditions");
     }
 
 }

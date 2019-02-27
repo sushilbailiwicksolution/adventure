@@ -6,6 +6,192 @@
     android:orientation="vertical"
     tools:context=".terms.PrivacyPolicyFragment">
 
+    <?xml version="1.0" encoding="utf-8"?>
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".terms.TermsConditionsFragment">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. Introduction"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_policy"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. Information Collection and Use"
+                android:fontFamily="@font/myfont"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/info_collect"
+                android:textColor="@color/black"
+                android:fontFamily="@font/myfont"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/playstore_link"
+                android:textColor="@color/blue"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:fontFamily="@font/myfont"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. Log Data"
+                android:textColor="@color/black"
+                android:fontFamily="@font/myfont"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_of_use"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4. Cookies"
+                android:textColor="@color/black"
+                android:fontFamily="@font/myfont"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_of_use"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5. Service Providers"
+                android:textColor="@color/black"
+                android:fontFamily="@font/myfont"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_of_use"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6. Security"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_of_use"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7. Links to Other Sites"
+                android:textColor="@color/black"
+                android:fontFamily="@font/myfont"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_of_use"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8. Children’s Privacy"
+                android:textColor="@color/black"
+                android:fontFamily="@font/myfont"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_of_use"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8. Changes to This Privacy Policy"
+                android:textColor="@color/black"
+                android:fontFamily="@font/myfont"
+                android:textSize="15sp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_of_use"
+                android:fontFamily="@font/myfont"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
