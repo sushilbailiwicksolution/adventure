@@ -34,22 +34,21 @@ import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.HomeNewTreandRecyclerAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.ImageSliderAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import me.relex.circleindicator.CircleIndicator;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.ImageSliderAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.custom_dialog.SweetAlertDialog;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.dialog.SumbitQuery;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.enquiryforms.EnquiryForm1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.CheckConnectivity;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.support.RootActivity;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Const;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.utils.Itags;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.dialog.SumbitQuery;
-import me.relex.circleindicator.CircleIndicator;
 
-public class ProductViewActivity extends RootActivity implements HomeNewTreandRecyclerAdapter.ProductIterface, View.OnClickListener {
+public class ProductViewActivity extends RootActivity implements View.OnClickListener {
 
     CircleIndicator indicator;
     Button btn_addToCart;
@@ -196,7 +195,7 @@ public class ProductViewActivity extends RootActivity implements HomeNewTreandRe
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
         }
@@ -506,17 +505,11 @@ public class ProductViewActivity extends RootActivity implements HomeNewTreandRe
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
         }
 
-
-    }
-
-
-    @Override
-    public void getDetail(String catname, int position) {
 
     }
 

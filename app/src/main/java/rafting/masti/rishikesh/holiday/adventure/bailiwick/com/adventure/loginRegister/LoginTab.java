@@ -34,10 +34,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.ActivityVendor.Activity_VendorDashboard;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.HomePage;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.OTPscreenActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activity_vendor.ActivityVendorDashboard;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.HomePage;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.OTPscreenActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbOperation;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
@@ -191,7 +191,7 @@ public class LoginTab extends Fragment {
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
         }
@@ -279,7 +279,7 @@ public class LoginTab extends Fragment {
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
 
         } else {
             Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
@@ -306,7 +306,7 @@ public class LoginTab extends Fragment {
                 Objects.requireNonNull(getActivity()).finish();
 
             } else if (data.getString("user_type").equalsIgnoreCase(Itags.VENDOR)) {
-                Intent i = new Intent(getActivity(), Activity_VendorDashboard.class);
+                Intent i = new Intent(getActivity(), ActivityVendorDashboard.class);
                 startActivity(i);
                 Objects.requireNonNull(getActivity()).finish();
             }

@@ -3,7 +3,7 @@ package rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.sessio
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 
 /**
  * Created by claritus on 2/3/16.
@@ -36,7 +36,7 @@ public class SharedPref {
 
     public static SharedPreferences getInstance() {
         if (prefs == null) {
-            prefs = PreferenceManager.getDefaultSharedPreferences(AppController1.getInstance());
+            prefs = PreferenceManager.getDefaultSharedPreferences(AppController.getInstance());
         }
         return prefs;
     }
@@ -257,7 +257,7 @@ public class SharedPref {
 
     public static void ClearAll() {
         SharedPreferences.Editor editor = getInstance().edit();
-        editor.clear().commit();
+        editor.clear().apply();
     }
 
 

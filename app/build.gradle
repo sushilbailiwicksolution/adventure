@@ -9,26 +9,27 @@ buildscript {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+//apply plugin: 'io.fabric'
 
 
 android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexKeepFile file('multidex-config.txt')
         }
     }
     dexOptions {
@@ -37,6 +38,7 @@ android {
 }
 
 dependencies {
+
     implementation 'com.google.firebase:firebase-messaging:11.0.4'
     implementation 'com.google.firebase:firebase-auth:11.0.4'
     implementation fileTree(include: ['*.jar'], dir: 'libs')

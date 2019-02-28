@@ -141,7 +141,7 @@
             android:orientation="vertical"
             android:padding="5dp">
 
-            <rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Number_picker.NumberPicker
+            <rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.number_picker.NumberPicker
                 android:id="@+id/picker_rooms"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -157,7 +157,7 @@
                 numberpicker:value="-5">
 
 
-            </rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Number_picker.NumberPicker>
+            </rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.number_picker.NumberPicker>
 
 
         </LinearLayout>

@@ -15,7 +15,7 @@
 
         <include
             android:id="@+id/include"
-            layout="@layout/header"/>
+            layout="@layout/header"></include>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,10 +25,11 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txt_available_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/border_gray"
                 android:fontFamily="@font/myfont"
                 android:padding="10dp"
@@ -44,13 +45,14 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txt_service_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="3dp"
                     android:fontFamily="@font/myfont"
-                    android:padding="4dp"
-                    android:text="25"
+                    android:padding="10dp"
+                    android:text=""
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -68,6 +70,7 @@
                         style="@style/MyRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="Open Room"
                         android:textColor="#154"
                         android:textStyle="bold" />
@@ -78,6 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
                         android:checked="false"
                         android:text="Close Room"
                         android:textColor="#154"
@@ -97,7 +101,7 @@
             android:orientation="vertical"
             android:padding="5dp">
 
-            <rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Number_picker.NumberPicker
+            <rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.number_picker.NumberPicker
                 android:id="@+id/picker_rooms"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -106,13 +110,14 @@
                 android:gravity="center"
                 numberpicker:custom_layout="@layout/number_picker_custom_layout"
                 numberpicker:focusable="true"
+
                 numberpicker:max="100"
                 numberpicker:min="1"
                 numberpicker:unit="1"
                 numberpicker:value="-5">
 
 
-            </rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Number_picker.NumberPicker>
+            </rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.number_picker.NumberPicker>
 
 
         </LinearLayout>
@@ -133,6 +138,7 @@
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_calender"
                 android:fontFamily="@font/myfont"
+
                 android:gravity="center"
                 android:text="From"
                 android:textColor="@color/black"

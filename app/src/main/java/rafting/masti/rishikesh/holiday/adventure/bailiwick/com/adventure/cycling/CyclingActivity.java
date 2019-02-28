@@ -47,16 +47,16 @@ import java.util.concurrent.TimeUnit;
 
 import dmax.dialog.SpotsDialog;
 import me.relex.circleindicator.CircleIndicator;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.CartList;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.HomePage;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.ImageSliderAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.SpinnerCustomAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.CartList;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.HomePage;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.ImageSliderAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.SpinnerCustomAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.custom_dialog.SweetAlertDialog;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DBfunction;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.Database_Utils;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbFunction;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbUtils;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbOperation;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.StateData;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
@@ -184,7 +184,7 @@ public class CyclingActivity extends AppCompatActivity implements View.OnClickLi
                     return headers;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stateRequest);
+            AppController.getInstance().addToRequestQueue(stateRequest);
         } else {
             Toast.makeText(this, "No Network Coverage", Toast.LENGTH_SHORT).show();
         }
@@ -243,7 +243,7 @@ public class CyclingActivity extends AppCompatActivity implements View.OnClickLi
                     return headers;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stateRequest);
+            AppController.getInstance().addToRequestQueue(stateRequest);
         } else {
             Toast.makeText(this, "No Network Coverage", Toast.LENGTH_SHORT).show();
         }
@@ -304,7 +304,7 @@ public class CyclingActivity extends AppCompatActivity implements View.OnClickLi
                     return headers;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(cityRequest);
+            AppController.getInstance().addToRequestQueue(cityRequest);
         } else {
             Toast.makeText(this, "No Network Coverage", Toast.LENGTH_SHORT).show();
         }
@@ -482,7 +482,7 @@ public class CyclingActivity extends AppCompatActivity implements View.OnClickLi
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(getCycleRequest);
+            AppController.getInstance().addToRequestQueue(getCycleRequest);
         } else {
             Toast.makeText(this, "No Network Coverage", Toast.LENGTH_SHORT).show();
         }
@@ -607,7 +607,7 @@ public class CyclingActivity extends AppCompatActivity implements View.OnClickLi
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBfunction.ExportDatabasee(CyclingActivity.this, Database_Utils.DB_NAME);
+                DbFunction.ExportDatabasee(CyclingActivity.this, DbUtils.DB_NAME);
                 alertDialog.dismiss();
             }
         });
@@ -680,7 +680,7 @@ public class CyclingActivity extends AppCompatActivity implements View.OnClickLi
 
             if (isSuccess) {
                 Toast.makeText(CyclingActivity.this, "Saved in Database", Toast.LENGTH_SHORT).show();
-                //DB_Function.ExportDatabasee(getActivity(), Database_Utils.DB_NAME);
+                //DB_Function.ExportDatabasee(getActivity(), DbUtils.DB_NAME);
                 //int cartCount = DbOperation.getRaftCount(CyclingActivity.this, service_id);
                 int cartCount = Objects.requireNonNull(DbOperation.getCartList(CyclingActivity.this)).size();
 
@@ -799,7 +799,7 @@ public class CyclingActivity extends AppCompatActivity implements View.OnClickLi
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(CyclingActivity.this, "Check Your connetion", Toast.LENGTH_LONG).show();
         }

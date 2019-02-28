@@ -1,132 +1,324 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:background="@color/light_blue"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt_logout"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:fontFamily="@font/myfont"
-        android:gravity="center"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora_b"
+                    android:text="@string/welcome"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora_b"
+                    android:padding="5dp"
+                    android:text="prince"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lora_r"
+                android:padding="5dp"
+                android:text="Logout"
+                android:layout_marginRight="4dp"
+                android:textAllCaps="true"
+                android:textColor="@color/red"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_booking_history"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lora_b"
+            android:padding="5dp"
+            android:text="@string/services"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/lora_r"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_8dp"
+                        android:text="@string/rafting"
+                        android:textAllCaps="true"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/img_raft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="raftTapButton"
+                        android:src="@drawable/ic_raft_inv" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/lora_r"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_8dp"
+                        android:text="@string/camping"
+                        android:textAllCaps="true"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/img_camping"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="campTapButton"
+                        android:src="@drawable/ic_camp_inv" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lora_b"
+            android:padding="5dp"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:text="@string/other_services"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/lora_r"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_8dp"
+                        android:text="@string/bungy"
+                        android:textAllCaps="true"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_bungy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="bungyTapButton"
+                        android:layout_gravity="center"
+                        android:src="@drawable/bunjee" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/lora_r"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_8dp"
+                        android:text="@string/cycling"
+                        android:textAllCaps="true"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_cycling"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="cycleTapButton"
+                        android:src="@drawable/cycling" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/lora_r"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_8dp"
+                        android:text="@string/biking"
+                        android:textAllCaps="true"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img_biking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="bikeTapButton"
+                        android:src="@drawable/bike" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_booking_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="3dp"
+        android:background="@drawable/ripple_button"
         android:padding="3dp"
-        android:text="Logout"
-        android:textAllCaps="true"
-        android:textColor="@color/red"
-        android:textSize="10sp"
-        android:textStyle="bold" />
+        android:textColor="@color/white"
+        android:fontFamily="@font/lora_b"
+        android:text="@string/my_booking"
+        android:textAllCaps="true" />
 
-    <TextView
-        android:id="@+id/txt_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/myfont"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text=""
-        android:textAllCaps="true"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:padding="5dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="10dp">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:padding="3dp">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/myfont"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Rafting"
-                android:textAllCaps="true"
-                android:textColor="@color/blue"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/img_raft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="RaftTapButton"
-                android:src="@drawable/ic_raft_inv" />
-
-
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/blue">
-
-    </View>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:padding="5dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="10dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="3dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/myfont"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Campaning"
-                android:textAllCaps="true"
-                android:textColor="@color/blue"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/img_camping"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="CampTapButton"
-                android:src="@drawable/ic_camp_inv" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-<Button
-    android:id="@+id/btn_booking_history"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="MY Booking"
-    android:padding="3dp"
-    android:background="@drawable/ripple_button"
-    android:layout_margin="3dp"
-    android:textAllCaps="true"/>
-</LinearLayout>
+</RelativeLayout>

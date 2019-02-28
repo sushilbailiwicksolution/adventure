@@ -32,9 +32,9 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.CartList;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.HomePage;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.BikeRecyclerAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.CartList;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.HomePage;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.BikeRecyclerAdapter;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbOperation;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.interfaces.BikeBookInterface;
@@ -310,7 +310,7 @@ public class BikingConfirmationActivity extends AppCompatActivity implements Ada
 
             if (isSuccess) {
                 Toast.makeText(BikingConfirmationActivity.this, "Saved in Database", Toast.LENGTH_SHORT).show();
-                //DB_Function.ExportDatabasee(getActivity(), Database_Utils.DB_NAME);
+                //DB_Function.ExportDatabasee(getActivity(), DbUtils.DB_NAME);
                 //int cartCount = DbOperation.getRaftCount(CyclingActivity.this, service_id);
                 int cartCount = Objects.requireNonNull(DbOperation.getCartList(BikingConfirmationActivity.this)).size();
 

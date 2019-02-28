@@ -39,8 +39,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.CartList;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.CartList;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbOperation;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
@@ -228,7 +228,7 @@ public class Rafting_Frag_Cointainer extends Fragment {
             }
         };
 
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+        AppController.getInstance().addToRequestQueue(stringRequest);
 
 
     }
@@ -367,7 +367,7 @@ public class Rafting_Frag_Cointainer extends Fragment {
             }
         };
 
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+        AppController.getInstance().addToRequestQueue(stringRequest);
 
 
     }
@@ -434,7 +434,7 @@ public class Rafting_Frag_Cointainer extends Fragment {
                 try {
                     Log.e("Check", "" + "i m heree");
 
-                    //DB_Function.ExportDatabasee(getActivity(), Database_Utils.DB_NAME);
+                    //DB_Function.ExportDatabasee(getActivity(), DbUtils.DB_NAME);
 
                     DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
                     DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd ");
@@ -467,7 +467,7 @@ public class Rafting_Frag_Cointainer extends Fragment {
 
                     if (isSuccess) {
                         Toast.makeText(getActivity(), "Saved in Database", Toast.LENGTH_SHORT).show();
-                        //DB_Function.ExportDatabasee(getActivity(), Database_Utils.DB_NAME);
+                        //DB_Function.ExportDatabasee(getActivity(), DbUtils.DB_NAME);
                         Intent i = new Intent(getActivity(), CartList.class);
                         startActivity(i);
                         getActivity().finish();

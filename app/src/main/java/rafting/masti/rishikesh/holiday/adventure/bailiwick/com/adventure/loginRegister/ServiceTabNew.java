@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.ProductCatagory;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.ServiceMasterRecyclerAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.ProductCatagory;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.ServiceMasterRecyclerAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.biking.BikingActivity;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.bungy_jump.BungeeJumpActivity;
@@ -143,7 +143,7 @@ public class ServiceTabNew extends Fragment implements ServiceMasterRecyclerAdap
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
 
         } else {
             Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();

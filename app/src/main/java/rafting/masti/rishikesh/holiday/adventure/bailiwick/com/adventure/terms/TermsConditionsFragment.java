@@ -35,7 +35,7 @@ public class TermsConditionsFragment extends Fragment {
     }
 
     private void setToolbar(){
-        toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.toolbar_main);
+        toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.toolbarTerms);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle("Terms and Conditions");
     }
 

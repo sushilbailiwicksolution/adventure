@@ -26,6 +26,7 @@ public class PrivacyPolicyFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_privacy_policy, container, false);
         getUiObject(view);
+        setToolbar();
 
         return view;
     }
@@ -35,7 +36,7 @@ public class PrivacyPolicyFragment extends Fragment {
     }
 
     private void setToolbar(){
-        toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.toolbar_main);
+        toolbar = Objects.requireNonNull(getActivity()).findViewById(R.id.toolbarTerms);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle("Privacy Policy");
     }
 

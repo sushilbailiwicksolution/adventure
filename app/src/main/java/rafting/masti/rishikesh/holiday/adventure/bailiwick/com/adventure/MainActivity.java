@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbOperation;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DBfunction;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.Database_Utils;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbFunction;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btn_export.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBfunction.ExportDatabasee(MainActivity.this, Database_Utils.DB_NAME);
+                DbFunction.ExportDatabasee(MainActivity.this, DbUtils.DB_NAME);
             }
         });
         btn_insertdata.setOnClickListener(new View.OnClickListener() {

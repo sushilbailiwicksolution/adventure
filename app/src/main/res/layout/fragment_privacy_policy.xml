@@ -26,8 +26,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myfont"
             android:text="@string/privacy_policy"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,8 +43,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myfont"
             android:text="@string/info_collect"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +52,7 @@
             android:fontFamily="@font/myfont"
             android:text="@string/playstore_link"
             android:textColor="@color/blue"
-            android:textSize="15sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,8 +69,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myfont"
             android:text="@string/terms_of_use"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,8 +86,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myfont"
             android:text="@string/terms_of_use"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,8 +103,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myfont"
             android:text="@string/terms_of_use"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -125,8 +120,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myfont"
             android:text="@string/terms_of_use"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -143,8 +137,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myfont"
             android:text="@string/terms_of_use"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -161,8 +154,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myfont"
             android:text="@string/terms_of_use"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -179,8 +171,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/myfont"
             android:text="@string/terms_of_use"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
     </LinearLayout>
 

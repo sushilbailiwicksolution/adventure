@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +15,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,12 +41,12 @@ import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 import me.relex.circleindicator.CircleIndicator;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.AboutRafting;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.CartList;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.HomePage;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.ImageSliderAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.SpinnerCustomAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.AboutRafting;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.CartList;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.HomePage;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.ImageSliderAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.SpinnerCustomAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbOperation;
@@ -204,7 +202,7 @@ public class BungeeJumpActivity extends AppCompatActivity implements View.OnClic
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(bannerRequest);
+            AppController.getInstance().addToRequestQueue(bannerRequest);
         } else {
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
@@ -267,7 +265,7 @@ public class BungeeJumpActivity extends AppCompatActivity implements View.OnClic
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(bungeeRequest);
+            AppController.getInstance().addToRequestQueue(bungeeRequest);
         } else {
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
@@ -393,7 +391,7 @@ public class BungeeJumpActivity extends AppCompatActivity implements View.OnClic
                     return headers;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stateRequest);
+            AppController.getInstance().addToRequestQueue(stateRequest);
         } else {
             Toast.makeText(BungeeJumpActivity.this, "No Network Coverage", Toast.LENGTH_SHORT).show();
         }

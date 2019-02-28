@@ -6,7 +6,7 @@
             android:id="@+id/nav_home"
             android:checked="true"
             android:icon="@drawable/ic_menu_home"
-            android:title="Home" />
+            android:title="@string/home" />
         <!--  <item
               android:id="@+id/nav_cart"
               android:icon="@drawable/ic_menu_history"
@@ -14,58 +14,74 @@
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_profile"
-            android:title="Profile" />
-
+            android:title="@string/profile" />
 
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communicate">
         <menu>
             <item
                 android:id="@+id/menu_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_order_history"
-                android:title="Order" />
+                android:title="@string/order" />
             <item
                 android:id="@+id/menu_enquery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_enquiry_history"
-                android:title="Enquiry" />
-           <!-- <item
-                android:id="@+id/menu_payment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_payment"
-                android:title="Payment" />-->
+                android:title="@string/enquiry" />
+            <!-- <item
+                 android:id="@+id/menu_payment"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:icon="@drawable/ic_payment"
+                 android:title="Payment" />-->
 
             <item
                 android:id="@+id/Query"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_chat"
-                android:title="Query" />
+                android:title="@string/query" />
 
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_share"
-                android:title="Share" />
+                android:title="@string/share" />
 
             <item
                 android:id="@+id/nav_rate_us"
                 android:icon="@drawable/ic_menu_history"
-                android:title="Rate Us" />
+                android:title="@string/rate_us" />
 
             <item
                 android:id="@+id/nav_contact_us"
                 android:icon="@drawable/ic_contact_us"
-                android:title="Contact Us" />
+                android:title="@string/contact_us" />
+
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/ic_contact_us"
+                android:title="@string/about_us" />
+
+            <item
+                android:id="@+id/nav_terms_conditions"
+                android:icon="@drawable/ic_contact_us"
+                android:title="@string/terms_and_conditions" />
+
+            <item
+                android:id="@+id/nav_privacy_policy"
+                android:icon="@drawable/ic_contact_us"
+                android:title="@string/privacy" />
+
         </menu>
     </item>
 
     <item android:title="@null">
         <item android:title="@null" />
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_menu_logout"

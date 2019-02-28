@@ -41,11 +41,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import dmax.dialog.SpotsDialog;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.AboutRafting;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.CartList;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.HomePage;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Activties.OTPscreenActivity;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.AboutRafting;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.CartList;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.HomePage;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.activities.OTPscreenActivity;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.database.DbOperation;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
@@ -215,7 +215,7 @@ public class RaftingActivity extends AppCompatActivity implements View.OnClickLi
                 }
             };
 
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
 
         } else {
             Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
@@ -346,7 +346,7 @@ public class RaftingActivity extends AppCompatActivity implements View.OnClickLi
                 }
             };
 
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
         }
@@ -503,7 +503,7 @@ public class RaftingActivity extends AppCompatActivity implements View.OnClickLi
 
             if (isSuccess) {
                 Toast.makeText(this, "Saved in Database", Toast.LENGTH_SHORT).show();
-                //DB_Function.ExportDatabasee(this(), Database_Utils.DB_NAME);
+                //DB_Function.ExportDatabasee(this(), DbUtils.DB_NAME);
                 //int cartCount = DbOperation.getRaftCount(this, sportsId);
                 int cartCount = Objects.requireNonNull(DbOperation.getCartList(RaftingActivity.this)).size();
                 Log.e("Cart Count => ", "" + cartCount);
@@ -606,7 +606,7 @@ public class RaftingActivity extends AppCompatActivity implements View.OnClickLi
                 }
             };
 
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(context, "Check Your connetion", Toast.LENGTH_LONG).show();
         }

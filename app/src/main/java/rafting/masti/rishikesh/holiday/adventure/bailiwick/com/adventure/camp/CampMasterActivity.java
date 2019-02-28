@@ -44,10 +44,10 @@ import java.util.Map;
 import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.CampMasterAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.ProductListRecyclerAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.SpinnerCustomAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.CampMasterAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.ProductListRecyclerAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.SpinnerCustomAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.CampMasterModel;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model.ProductListBean;
@@ -291,7 +291,7 @@ public class CampMasterActivity extends RootActivity implements CampMasterAdapte
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(context, "No Internet Connection", Toast.LENGTH_LONG).show();
         }
@@ -393,7 +393,7 @@ public class CampMasterActivity extends RootActivity implements CampMasterAdapte
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(context, "No Internet Connection", Toast.LENGTH_LONG).show();
         }
@@ -455,7 +455,7 @@ public class CampMasterActivity extends RootActivity implements CampMasterAdapte
                     return headers;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stateRequest);
+            AppController.getInstance().addToRequestQueue(stateRequest);
         } else {
             Toast.makeText(context, "No Network Coverage", Toast.LENGTH_SHORT).show();
         }
@@ -530,7 +530,7 @@ public class CampMasterActivity extends RootActivity implements CampMasterAdapte
     public void onItemClick(int position) {
         Log.e("my position ", ": " + position);
 
-        Intent i = new Intent(CampMasterActivity.this, Camp_viewActivity.class);
+        Intent i = new Intent(CampMasterActivity.this, CampViewActivity.class);
         i.putExtra("camp_id", productListBeanList.get(position).getStr_package_id());
         i.putExtra("camp_name", productListBeanList.get(position).getStr_package_name());
         i.putExtra("camp_amount", productListBeanList.get(position).getStr_price());

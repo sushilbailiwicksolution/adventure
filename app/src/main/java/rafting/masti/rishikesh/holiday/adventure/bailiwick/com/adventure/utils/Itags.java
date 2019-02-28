@@ -16,4 +16,10 @@ public class Itags {
 
     public static final String Header = "app_token";
 
+
+    // Prince 20 feb 2019
+    public static final String Cycle = "4";
+    public static final String Biking = "5";
+    public static final String Bungy = "6";
+
 }

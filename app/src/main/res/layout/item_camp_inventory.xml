@@ -32,6 +32,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/txt_Type_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -40,112 +41,112 @@
                 android:text="Room Status : "
                 android:textColor="@color/black"
                 android:textSize="18sp" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:weightSum="4">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="4">
 
-        <TextView
-            android:id="@+id/txt_total"
+                    <TextView
+                        android:id="@+id/txt_total"
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/border_blue_inventory"
-            android:fontFamily="@font/myfont"
-            android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_blue_inventory"
+                        android:fontFamily="@font/myfont"
+                        android:gravity="center"
 
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:text="35"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:text="35"
 
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/txt_available"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/border_yellow_inventory"
-            android:fontFamily="@font/myfont"
-            android:gravity="center"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:text="20"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/txt_available"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_yellow_inventory"
+                        android:fontFamily="@font/myfont"
+                        android:gravity="center"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:text="20"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/txt_booked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/border_green_inventory"
-            android:fontFamily="@font/myfont"
-            android:gravity="center"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:text="15"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:visibility="gone">
+                    <TextView
+                        android:id="@+id/txt_booked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_green_inventory"
+                        android:fontFamily="@font/myfont"
+                        android:gravity="center"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:text="15"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:paddingBottom="2dp"
-        android:paddingTop="2dp"
-        android:background="@drawable/border_blue_inventory"
-        android:fontFamily="@font/myfont"
-        android:gravity="center"
-        android:text="S 100"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:background="@drawable/border_blue_inventory"
+                        android:fontFamily="@font/myfont"
+                        android:gravity="center"
+                        android:text="S 100"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="3dp"
-        android:layout_weight="1"
-        android:background="@drawable/border_yellow_inventory"
-        android:paddingBottom="2dp"
-        android:paddingTop="2dp"
-        android:fontFamily="@font/myfont"
-        android:gravity="center"
-        android:text="D 200"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_yellow_inventory"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:fontFamily="@font/myfont"
+                        android:gravity="center"
+                        android:text="D 200"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
-</LinearLayout>
+                </LinearLayout>
 
-</LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
 

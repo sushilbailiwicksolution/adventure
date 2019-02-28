@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_tab_pressed"
-    tools:context=".Activties.ContactUsActivity">
+    tools:context=".activities.ContactUsActivity">
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nested_scroll"

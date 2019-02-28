@@ -5,6 +5,7 @@ package rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.model;
  */
 
 public class RaftingInventoryBeans {
+
     private String Str_id,Str_tittle,Str_start_point,Str_start_pointID,Str_time,Str_timeID,Str_seats_avilable,Str_selected_date;
 
     public RaftingInventoryBeans(String str_id, String str_tittle, String str_start_point, String str_start_pointID, String str_time, String str_timeID, String str_seats_avilable, String str_selected_date) {

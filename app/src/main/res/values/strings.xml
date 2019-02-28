@@ -66,7 +66,6 @@
 
     <string name="check_in">Check In</string>
     <string name="check_out">Check Out</string>
-    <string name="select_date">Select Date</string>
 
     <string name="terms_of_use">By downloading, browsing, accessing or using this Sample Store mobile
         application (“Mobile Application”), you agree to be bound by these Terms and Conditions of Use.
@@ -93,5 +92,25 @@
         service providers used by the app</string>
 
     <string name="playstore_link">\u25CF  http://play.google.com/store/apps/details?id=rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="communicate">Communicate</string>
+    <string name="order">Order</string>
+    <string name="enquiry">Enquiry</string>
+    <string name="query">Query</string>
+    <string name="share">Share</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="about_us">About Us</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="welcome">Welcome :</string>
+    <string name="other_services">Other Services</string>
+    <string name="services">Services</string>
+    <string name="my_booking">My Booking</string>
+    <string name="biking">Biking</string>
+    <string name="cycling">Cycling</string>
+    <string name="bungy">Bungy</string>
+    <string name="select_date">Select Date</string>
 
 </resources>

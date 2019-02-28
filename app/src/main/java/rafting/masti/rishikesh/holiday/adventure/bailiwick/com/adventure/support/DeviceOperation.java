@@ -5,7 +5,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Firebase.MyFirebaseInstanceIDService;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.firebase.MyFirebaseInstanceIDService;
 
 
 /**

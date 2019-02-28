@@ -35,10 +35,10 @@ import java.util.Locale;
 import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Number_picker.Enums.ActionEnum;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Number_picker.Interface.ValueChangedListener;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Number_picker.NumberPicker;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.number_picker.Enums.ActionEnum;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.number_picker.Interface.ValueChangedListener;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.number_picker.NumberPicker;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.custom_dialog.SweetAlertDialog;
@@ -304,7 +304,7 @@ public class CampBookinDialog extends Dialog {
                 }
             };
 
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
 
         } else {
             Toast.makeText(mContext, "Check Your Connection", Toast.LENGTH_LONG).show();

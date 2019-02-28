@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.session.SharedPref;
@@ -135,7 +135,7 @@ public class Rafting_Frag_personal extends Fragment {
             }
         };
 
-        AppController1.getInstance().addToRequestQueue(stringRequest);
+        AppController.getInstance().addToRequestQueue(stringRequest);
 
 
     }

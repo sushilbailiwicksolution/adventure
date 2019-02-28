@@ -20,16 +20,14 @@ import java.util.Locale;
 
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 
-/**
- * Created by Prince on 28-11-2017.
- */
 
 public class EnquiryForm1 extends Dialog {
-    NiceSpinner nice_spinner_timing, nice_spinner_seat_requried, nice_spinner_starting_point;
+
+    private NiceSpinner nice_spinner_timing, nice_spinner_seat_requried, nice_spinner_starting_point;
     private EditText fromDateEtxt;
     private DatePickerDialog toDatePickerDialog;
     private SimpleDateFormat dateFormatter;
-    Activity mContext;
+    private Activity mContext;
 
     public EnquiryForm1(Activity con) {
         super(con);
@@ -45,7 +43,7 @@ public class EnquiryForm1 extends Dialog {
     private void SetDateListner() {
         fromDateEtxt.setInputType(InputType.TYPE_NULL);
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
 
         Calendar newCalendar = Calendar.getInstance();
@@ -69,10 +67,10 @@ public class EnquiryForm1 extends Dialog {
     }
 
     private void createIds() {
-        fromDateEtxt = (EditText) findViewById(R.id.fromDateEtxt);
-        nice_spinner_timing = (NiceSpinner) findViewById(R.id.nice_spinner_timing);
-        nice_spinner_starting_point = (NiceSpinner) findViewById(R.id.nice_spinner_starting_point);
-        nice_spinner_seat_requried = (NiceSpinner) findViewById(R.id.nice_spinner_seat_requried);
+        fromDateEtxt = findViewById(R.id.fromDateEtxt);
+        nice_spinner_timing = findViewById(R.id.nice_spinner_timing);
+        nice_spinner_starting_point = findViewById(R.id.nice_spinner_starting_point);
+        nice_spinner_seat_requried = findViewById(R.id.nice_spinner_seat_requried);
         List<String> dataset = new LinkedList<>(Arrays.asList("Select Time", "08:00", "08:00", "08:00", "08:00", "08:00"));
         List<String> datasetDestination = new LinkedList<>(Arrays.asList("Select Starting Point", "ShivPuri", "Brahmpuri", "Merinei Drive", "Kaudiyala", "08:00"));
         ArrayList<String> Seats = new ArrayList<>();

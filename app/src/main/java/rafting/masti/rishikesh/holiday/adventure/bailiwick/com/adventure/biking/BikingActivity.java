@@ -34,9 +34,9 @@ import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 import me.relex.circleindicator.CircleIndicator;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.ImageSliderAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.Adapter.SpinnerCustomAdapter;
-import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.App.AppController1;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.ImageSliderAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.adapter.SpinnerCustomAdapter;
+import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.app.AppController;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.R;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.apputils.UtilsUrl;
 import rafting.masti.rishikesh.holiday.adventure.bailiwick.com.adventure.custom_dialog.SweetAlertDialog;
@@ -144,7 +144,7 @@ public class BikingActivity extends AppCompatActivity implements View.OnClickLis
                     return headers;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stateRequest);
+            AppController.getInstance().addToRequestQueue(stateRequest);
         } else {
             Toast.makeText(BikingActivity.this, "No Network Coverage", Toast.LENGTH_SHORT).show();
         }
@@ -205,7 +205,7 @@ public class BikingActivity extends AppCompatActivity implements View.OnClickLis
                     return headers;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(cityRequest);
+            AppController.getInstance().addToRequestQueue(cityRequest);
         } else {
             Toast.makeText(this, "No Network Coverage", Toast.LENGTH_SHORT).show();
         }
@@ -402,7 +402,7 @@ public class BikingActivity extends AppCompatActivity implements View.OnClickLis
                     return params;
                 }
             };
-            AppController1.getInstance().addToRequestQueue(stringRequest);
+            AppController.getInstance().addToRequestQueue(stringRequest);
         } else {
             Toast.makeText(BikingActivity.this, "Check Your connetion", Toast.LENGTH_LONG).show();
         }
